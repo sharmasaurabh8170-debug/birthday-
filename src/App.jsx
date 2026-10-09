@@ -71,7 +71,7 @@ if (page === "cake") {
           </div>
 
           <h1 className="birthday-title">
-            Happy
+           <span> Happy </span>
             <span>Birthday 💝❣</span>
           </h1>
 
@@ -97,7 +97,9 @@ if (page === "cake") {
               </div>
 
               <div>
-                <h2>My Princess ❤️</h2>
+                <h2>
+                 <span> My Princess ❤️</span>
+                  </h2>
 
                 <p>
                   Little moments that mean a lot ❤️.
@@ -119,7 +121,9 @@ if (page === "cake") {
               </div>
 
               <div>
-                <h2>My Love for You ❤️</h2>
+                <h2>
+                  <span> My Love for You ❤️</span>
+                  </h2>
 
                 <p>
                   Something I wanted to tell you ❤️.
@@ -141,7 +145,9 @@ if (page === "cake") {
               </div>
 
               <div>
-                <h2>Cake cutting time😁😚 </h2>
+                <h2>
+                 <span> Cake cutting time😁😚</span> 
+                  </h2>
 
                 <p>
                   There's a surprise waiting😉..
@@ -181,7 +187,7 @@ if (page === "cake") {
         </p>
 
         <h1>
-          Welcome,
+         <span> Welcome, </span>
           <span>Babyy 💝❣</span>
         </h1>
 
