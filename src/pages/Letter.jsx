@@ -20,11 +20,11 @@ const handleOpenLetter = () => {
       <div className="letter-glow letter-glow-two" />
 
       <button
-        className="back-button"
-        onClick={onBack}
-      >
-        ← Back
-      </button>
+  className="back-button letter-back-button"
+  onClick={onBack}
+>
+  ← Back
+</button>
 
       {!opened ? (
         /* =================================
@@ -251,13 +251,21 @@ const handleOpenLetter = () => {
 
           {/* Read again */}
 
-          <button
-            className="close-letter-button"
-            onClick={() => setOpened(false)}
-          >
-            Read it again🤭..
-          </button>
+          <div className="letter-bottom-actions">
+  <button
+    className="close-letter-button"
+    onClick={() => setOpened(false)}
+  >
+    Read it again
+  </button>
 
+  <button
+    className="back-button letter-mobile-back"
+    onClick={onBack}
+  >
+    ← Back to Home
+  </button>
+</div>
         </section>
 
       )}

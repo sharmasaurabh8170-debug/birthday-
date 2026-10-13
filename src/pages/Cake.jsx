@@ -1,19 +1,20 @@
+
 import { useState } from "react";
+import { supabase } from "../lib/supabase";
+import "./Cake.css";
 
 export default function Cake({ onBack }) {
-  const [step, setStep] = useState("wish");
-const [showWish, setShowWish] = useState(false);
-const [wish, setWish] = useState("");
-
-  const handleWish = () => {
-    setStep("blow");
-  };
+  const [step, setStep] = useState("blow");
+  const [showWish, setShowWish] = useState(false);
+  const [wish, setWish] = useState("");
+  const [savingWish, setSavingWish] = useState(false);
+  const [wishStatus, setWishStatus] = useState("");
+  const [wishSaved, setWishSaved] = useState(false);
+  const [showFinal, setShowFinal] = useState(false);
 
   const handleBlow = () => {
-    // Start candle-blowing animation
     setStep("blowing");
 
-    // After the animation, show the cut-cake step
     setTimeout(() => {
       setStep("cut");
     }, 1000);
@@ -23,8 +24,41 @@ const [wish, setWish] = useState("");
     setStep("cutting");
 
     setTimeout(() => {
-      setStep("gift");
+      setStep("bite");
     }, 1200);
+  };
+
+  const handleSaveWish = async () => {
+    const cleanedWish = wish.trim();
+
+    if (!cleanedWish) {
+      setWishStatus("Please write your birthday wish first 💗");
+      return;
+    }
+
+    setSavingWish(true);
+    setWishStatus("");
+
+    try {
+      const { error } = await supabase
+        .from("birthday_wishes")
+        .insert([{ wish: cleanedWish }]);
+
+      if (error) {
+        throw error;
+      }
+
+      setWishSaved(true);
+      setWishStatus("Your wish has been saved successfully! 💌✨");
+    } catch (error) {
+      console.error("Error saving birthday wish:", error);
+
+      setWishStatus(
+        "We couldn't save your wish. Please try again. 💗"
+      );
+    } finally {
+      setSavingWish(false);
+    }
   };
 
   return (
@@ -32,319 +66,336 @@ const [wish, setWish] = useState("");
       <div className="cake-glow cake-glow-one" />
       <div className="cake-glow cake-glow-two" />
 
-      <button className="back-button" onClick={onBack}>
-        ← Back
-      </button>
+      {!showFinal && (
+        <button className="back-button" onClick={onBack}>
+          ← Back
+        </button>
+      )}
 
-      {/* =========================
-          CAKE SECTION
-      ========================= */}
+      {/* BIRTHDAY CAKE EXPERIENCE */}
 
       {step !== "gift" && (
         <section className="cake-section">
+          <p className="eyebrow">A LITTLE BIRTHDAY MAGIC ✨</p>
 
-          <p className="eyebrow">
-            ONE MORE LITTLE SURPRISE 🤭
-          </p>
-
-          {/* =========================
-              MAKE A WISH
-          ========================= */}
-
-          {step === "wish" && (
+          {step === "blow" && (
             <>
               <h1 className="cake-heading">
-                Make a
-                <span>Wish</span>
+                Blow the <span>Candles 🕯️</span>
               </h1>
 
               <p className="cake-intro">
-                Close your eyes and think of something 💫💬
+                Close your eyes, make a little wish,
                 <br />
-                you really wish for. ✨
+                and blow out the candles. 💗
               </p>
             </>
           )}
 
-          {/* =========================
-              BLOW CANDLES
-          ========================= */}
-
-          {(step === "blow" || step === "blowing") && (
+          {step === "blowing" && (
             <>
               <h1 className="cake-heading">
-                Now
-                <span>Blow the Candles🕯️</span>
+                Make a Wish <span>✨</span>
               </h1>
 
               <p className="cake-intro">
-                Make your wish ✨...
-                <br />
-                and blow out the candles🕯️..
+                Whoosh! Blow those candles away! 💨
               </p>
             </>
           )}
 
-          {/* =========================
-              CUT CAKE
-          ========================= */}
-
-          {step === "cut" && (
+          {(step === "cut" || step === "cutting") && (
             <>
               <h1 className="cake-heading">
-                One Last
-                <span>Thing...</span>
+                Time to <span>Cut the Cake 🎂</span>
               </h1>
 
               <p className="cake-intro">
-                Your wish has been made 💫.
+                A birthday isn't complete without cake.
                 <br />
-                Now let's cut the birthday cake🎂
+                Let's cut your special cake! 💕
               </p>
             </>
           )}
 
-          {/* =========================
-              CAKE
-          ========================= */}
+          {step === "bite" && (
+            <>
+              <h1 className="cake-heading">
+                A Little <span>Birthday Treat 🍰</span>
+              </h1>
+
+              <p className="cake-intro">
+                I saved the sweetest piece just for you.
+                <br />
+                Come on, take a bite! 😋💗
+              </p>
+            </>
+          )}
+
+          {/* CAKE AND CANDLES */}
 
           <div
             className={`birthday-cake ${
               step === "cutting" ? "cake-cut" : ""
-            }`}
+            } ${step === "bite" ? "cake-after-cut" : ""}`}
           >
-
-            {/* Candles */}
-
             <div
               className={`candles ${
-                step === "blowing" ? "candles-blowing" : ""
+                ["blowing", "cut", "cutting", "bite"].includes(step)
+                  ? "candles-blowing"
+                  : ""
               }`}
             >
+              {[1, 2, 3].map((candle) => (
+                <div className="candle" key={candle}>
+                  {step === "blow" && (
+                    <div className="flame">🔥</div>
+                  )}
 
-              {/* Candle 1 */}
-
-              <div className="candle">
-                {(step === "wish" ||
-                  step === "blow" ||
-                  step === "blowing") && (
-                  <div className="flame">
-                    🔥
-                  </div>
-                )}
-
-                {step === "cut" && (
-                  <div className="smoke">
-                    〰
-                  </div>
-                )}
-              </div>
-
-              {/* Candle 2 */}
-
-              <div className="candle">
-                {(step === "wish" ||
-                  step === "blow" ||
-                  step === "blowing") && (
-                  <div className="flame">
-                    🔥
-                  </div>
-                )}
-
-                {step === "cut" && (
-                  <div className="smoke">
-                    〰
-                  </div>
-                )}
-              </div>
-
-              {/* Candle 3 */}
-
-              <div className="candle">
-                {(step === "wish" ||
-                  step === "blow" ||
-                  step === "blowing") && (
-                  <div className="flame">
-                    🔥
-                  </div>
-                )}
-
-                {step === "cut" && (
-                  <div className="smoke">
-                    〰
-                  </div>
-                )}
-              </div>
-
+                  {["cut", "cutting", "bite"].includes(step) && (
+                    <div className="smoke">〰</div>
+                  )}
+                </div>
+              ))}
             </div>
-
-            {/* Cake top */}
 
             <div className="cake-top">
               <span>♥ ♥</span>
             </div>
 
-            {/* Cake layers */}
-
             <div className="cake-middle" />
-
             <div className="cake-bottom" />
-
-            {/* Plate */}
-
             <div className="cake-plate" />
 
+            {step === "bite" && (
+              <div
+                className="cake-slice"
+                aria-label="A slice of birthday cake"
+              >
+                <div className="slice-icing">♥</div>
+                <div className="slice-layer slice-layer-top" />
+                <div className="slice-layer slice-layer-bottom" />
+                <div className="slice-plate" />
+              </div>
+            )}
           </div>
 
-          {/* =========================
-              BUTTONS
-          ========================= */}
-
-          {/* Make a Wish */}
-
-          {step === "wish" && (
-            <button
-              className="wish-button"
-              onClick={handleWish}
-            >
-              Make a Wish ✨
-            </button>
-          )}
-
-          {/* Blow Candles */}
+          {/* CAKE BUTTONS */}
 
           {step === "blow" && (
-            <button
-              className="wish-button"
-              onClick={handleBlow}
-            >
+            <button className="wish-button" onClick={handleBlow}>
               Blow the Candles 🕯️
             </button>
           )}
 
-          {/* Blowing animation */}
-
           {step === "blowing" && (
-            <p className="cake-message">
-              ✨ Whoosh... ✨
-            </p>
+            <p className="cake-message">✨ Whoosh... ✨</p>
           )}
 
-          {/* Cut Cake */}
-
           {step === "cut" && (
-            <button
-              className="cut-cake-button"
-              onClick={handleCut}
-            >
-              Cut the Cake🎂
+            <button className="cut-cake-button" onClick={handleCut}>
+              Cut the Cake 🎂
             </button>
           )}
 
-          {/* Cutting */}
-
           {step === "cutting" && (
             <p className="cake-message">
-              Cutting your birthday cake...✨
+              Cutting your birthday cake... 🎂✨
             </p>
           )}
 
+          {step === "bite" && (
+            <button
+              className="wish-button"
+              onClick={() => {
+                setStep("gift");
+                setShowWish(false);
+                setWishStatus("");
+              }}
+            >
+              Take a Bite 😋🍰
+            </button>
+          )}
         </section>
       )}
 
-      {/* =========================
-          FINAL GIFT
-      ========================= */}
+      {/* TEDDY BEAR AND BIRTHDAY WISH */}
 
-      {step === "gift" && (
+      {step === "gift" && !showFinal && (
         <section className="teddy-section">
-
-          <p className="eyebrow">
-            AAPKA GIFT 😁✨
-          </p>
+          <p className="eyebrow">YOUR LITTLE SURPRISE 🎁</p>
 
           <div className="teddy">
-
             <div className="teddy-ear teddy-ear-left" />
-
             <div className="teddy-ear teddy-ear-right" />
 
             <div className="teddy-head">
-
               <div className="teddy-eye left" />
-
               <div className="teddy-eye right" />
-
               <div className="teddy-nose" />
-
               <div className="teddy-mouth" />
-
             </div>
 
             <div className="teddy-body">
-
-              <div className="teddy-heart">
-                ♥
-              </div>
-
+              <div className="teddy-heart">♥</div>
             </div>
 
             <div className="teddy-arm teddy-arm-left" />
-
             <div className="teddy-arm teddy-arm-right" />
-
           </div>
 
           <h1 className="teddy-title">
-            I am the
-            <span>gift. 🧸</span>
+            I am the <span>gift. 🧸</span>
           </h1>
 
-        <p className="teddy-message">
-  Because you deserve something❤️
-  <br />
-  a little extra special today. ❤️
-</p>
+          <p className="teddy-message">
+            Because you deserve something
+            <br />
+            a little extra special today. ❤️
+          </p>
 
-<div className="wish-area">
-  <button
-    className="make-wish-button"
-    onClick={() => setShowWish(true)}
-  >
-    Make a Wish ✨
-  </button>
-</div>
+          {!showWish && (
+            <div className="wish-area">
+              <button
+                className="make-wish-button"
+                onClick={() => {
+                  setShowWish(true);
+                  setWishStatus("");
+                }}
+              >
+                Make a Wish ✨
+              </button>
+            </div>
+          )}
 
-{showWish && (
-  <div className="wish-box">
-    <h2>Make a Wish ✨</h2>
+          {showWish && (
+            <div className="wish-box">
+              {!wishSaved ? (
+                <>
+                  <h2>Make a Wish ✨</h2>
 
-    <p>
-      Write your birthday wish and keep it
-      somewhere special. 💖
-    </p>
+                  <p>
+                    Write your birthday wish and keep it somewhere
+                    special. 💖
+                  </p>
 
-    <textarea
-      value={wish}
-      onChange={(e) => setWish(e.target.value)}
-      placeholder="Write your wish here..."
-      maxLength={300}
-    />
+                  <textarea
+                    value={wish}
+                    onChange={(event) => {
+                      setWish(event.target.value);
+                      setWishStatus("");
+                    }}
+                    placeholder="Write your wish here..."
+                    maxLength={2000}
+                    disabled={savingWish}
+                  />
 
-    <button
-      className="send-wish-button"
-      onClick={() => {
-        console.log("Wish:", wish);
-      }}
-    >
-      Send My Wish 💌
-    </button>
-  </div>
-)}
+                  <p className="wish-character-count">
+                    {wish.length}/2000
+                  </p>
 
-</section>
+                  <button
+                    className="send-wish-button"
+                    onClick={handleSaveWish}
+                    disabled={savingWish}
+                  >
+                    {savingWish
+                      ? "Saving Your Wish... 💗"
+                      : "Send My Wish 💌"}
+                  </button>
+                </>
+              ) : (
+                <h2>Wish Saved! 💖</h2>
+              )}
+
+              {wishStatus && (
+                <p className="wish-status" role="status">
+                  {wishStatus}
+                </p>
+              )}
+            </div>
+          )}
+
+          {/* REVEAL FINALE AFTER SUCCESSFUL SAVE */}
+
+          {wishSaved && (
+            <button
+              className="final-reveal-button"
+              onClick={() => setShowFinal(true)}
+            >
+              One Last Thing, Pari… 💌
+            </button>
+          )}
+        </section>
       )}
 
+      {/* CINEMATIC FINAL SURPRISE */}
+
+      {step === "gift" && showFinal && (
+        <section className="final-surprise">
+          <div className="final-stars" aria-hidden="true">
+            <span>✦</span>
+            <span>✧</span>
+            <span>♡</span>
+            <span>✦</span>
+            <span>✧</span>
+            <span>♡</span>
+            <span>✦</span>
+          </div>
+
+          <div className="final-content">
+            <p className="final-eyebrow">
+              ONE LAST THING, PARI ✨
+            </p>
+
+            <div className="final-heart" aria-hidden="true">
+              ♡
+            </div>
+
+            <h1 className="final-title">
+              My World Is <span>More Beautiful</span>
+              <br />
+              With You ❤️
+            </h1>
+
+            <p className="final-message">
+              Pari, I made this little world just for you,
+              <br />
+              filled with memories and moments
+              <br />
+              that mean so much to me.
+              <br />
+              <br />
+              I hope this little surprise brings
+              <br />
+              a smile to your face today
+              <br />
+              and whenever you remember it. 💗
+            </p>
+
+            <div className="final-divider">
+              <span>✦</span>
+              <span>♡</span>
+              <span>✦</span>
+            </div>
+
+            <p className="final-signature">
+              Happy Birthday, Pari! 🎂
+            </p>
+
+            <p className="final-forever">
+              Made with love, just for you.
+            </p>
+
+            <button
+              className="final-replay-button"
+              onClick={() => setShowFinal(false)}
+            >
+              Return to Your Surprise 💕
+            </button>
+          </div>
+        </section>
+      )}
     </main>
   );
 }

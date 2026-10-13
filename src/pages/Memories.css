@@ -1,0 +1,1045 @@
+/* =========================================
+   MEMORIES PAGE — PREMIUM ROMANTIC DESIGN
+   ========================================= */
+
+.memories-page {
+  --memory-pink: #ff8fb8;
+  --memory-pink-light: #ffd1e2;
+  --memory-purple: #c7a6ff;
+  --memory-text: #fff5fa;
+  --memory-muted: #c9b8ca;
+  --memory-card: rgba(255, 255, 255, 0.055);
+
+  box-sizing: border-box;
+  min-height: 100vh;
+  width: 100%;
+  padding: 32px 6%;
+  position: relative;
+  overflow-x: hidden;
+  isolation: isolate;
+
+  color: var(--memory-text);
+  background:
+    radial-gradient(
+      ellipse at 10% 5%,
+      rgba(177, 85, 151, 0.17),
+      transparent 40%
+    ),
+    radial-gradient(
+      ellipse at 90% 85%,
+      rgba(113, 77, 180, 0.16),
+      transparent 40%
+    ),
+    linear-gradient(135deg, #100b18 0%, #1b1024 48%, #100b18 100%);
+
+  font-family: "Poppins", sans-serif;
+}
+
+.memories-page *,
+.memories-page *::before,
+.memories-page *::after {
+  box-sizing: border-box;
+}
+
+/* Background decoration */
+
+.memories-page::before,
+.memories-page::after {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.12;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.memories-page::before {
+  top: 15%;
+  left: -180px;
+  background: #ff5fa2;
+}
+
+.memories-page::after {
+  right: -180px;
+  bottom: 5%;
+  background: #9b72ff;
+}
+
+/* =========================================
+   HEADER
+   ========================================= */
+
+.memories-header {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto 42px;
+  position: relative;
+}
+
+.memories-page .back-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 11px 17px;
+  margin-bottom: 35px;
+
+  color: var(--memory-text);
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+
+  font: inherit;
+  font-size: 13px;
+  cursor: pointer;
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.memories-page .back-button:hover {
+  background: rgba(255, 143, 184, 0.13);
+  border-color: rgba(255, 143, 184, 0.45);
+  transform: translateX(-3px);
+}
+
+.memories-heading {
+  max-width: 750px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.memories-heading .eyebrow {
+  margin-bottom: 15px;
+  color: var(--memory-pink);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  line-height: 1.8;
+}
+
+.memories-heading h1 {
+  margin: 0 0 16px;
+  color: var(--memory-text);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(36px, 6vw, 66px);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  overflow-wrap: anywhere;
+}
+
+.memories-heading > p:last-child {
+  max-width: 550px;
+  margin: 0 auto;
+  color: var(--memory-muted);
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+/* =========================================
+   MEMORY FOLDER GRID
+   ========================================= */
+
+.memory-folder-grid {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 26px;
+  align-items: stretch;
+}
+
+.memory-folder-card {
+  min-width: 0;
+  padding: 12px;
+
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+
+  color: var(--memory-text);
+  background: var(--memory-card);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 22px;
+
+  cursor: pointer;
+  overflow: hidden;
+
+  transition:
+    transform 0.35s ease,
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.memory-folder-card:hover {
+  transform: translateY(-7px);
+  background: rgba(255, 255, 255, 0.085);
+  border-color: rgba(255, 143, 184, 0.42);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
+}
+
+.memories-page .memory-folder-card:focus-visible,
+.memories-page .memory-media-card:focus-visible,
+.memories-page .back-button:focus-visible {
+  outline: 2px solid var(--memory-pink);
+  outline-offset: 4px;
+}
+
+/* =========================================
+   AUTOMATICALLY RESIZING FOLDER COVERS
+   ========================================= */
+
+.memory-folder-cover {
+  position: relative;
+  width: 100%;
+
+  /* Automatically maintain a consistent image shape */
+  aspect-ratio: 4 / 3;
+  height: auto;
+  min-height: 0;
+
+  overflow: hidden;
+  border-radius: 15px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 143, 184, 0.15),
+      rgba(151, 113, 255, 0.13)
+    );
+}
+
+/* Cover image automatically fills its container */
+
+.memory-folder-cover img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  transition: transform 0.6s ease;
+}
+
+.memory-folder-card:hover .memory-folder-cover img {
+  transform: scale(1.05);
+}
+
+/* Placeholder when there is no cover image */
+
+.memory-folder-placeholder {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+
+  color: var(--memory-pink-light);
+
+  background:
+    radial-gradient(
+      circle at 50% 40%,
+      rgba(255, 143, 184, 0.14),
+      transparent 65%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.035),
+      rgba(255, 255, 255, 0.01)
+    );
+}
+
+.memory-folder-placeholder > span {
+  font-size: 32px;
+  line-height: 1;
+}
+
+.memory-folder-placeholder svg {
+  opacity: 0.85;
+  stroke-width: 1.4;
+}
+
+/* Folder details */
+
+.memory-folder-info {
+  padding: 19px 8px 10px;
+}
+
+.memory-folder-info h2 {
+  margin: 0 0 8px;
+  color: var(--memory-text);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 21px;
+  font-weight: 500;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.memory-folder-info p {
+  margin: 0;
+  color: var(--memory-muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* =========================================
+   OPENED MEMORY FOLDER
+   ========================================= */
+
+.memory-content {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* Empty folder message */
+
+.memory-empty-state {
+  width: 100%;
+  max-width: 620px;
+  margin: 45px auto 70px;
+  padding: 55px 30px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 24px;
+}
+
+.memory-empty-state > svg {
+  margin-bottom: 22px;
+  color: var(--memory-pink);
+  stroke-width: 1.5;
+}
+
+.memory-empty-state h2 {
+  margin: 0 0 12px;
+  color: var(--memory-text);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(23px, 4vw, 31px);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.memory-empty-state p {
+  max-width: 430px;
+  margin: 0;
+  color: var(--memory-muted);
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+/* =========================================
+   PHOTO GALLERY
+   ========================================= */
+
+.memory-media-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+
+.memory-media-card {
+  position: relative;
+  min-width: 0;
+  aspect-ratio: 4 / 3;
+  padding: 0;
+
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 17px;
+
+  background: rgba(255, 255, 255, 0.04);
+  cursor: pointer;
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.memory-media-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(255, 143, 184, 0.5);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.28);
+}
+
+/* Gallery image sizing */
+
+.memory-media-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  transition: transform 0.5s ease;
+}
+
+.memory-media-card:hover img {
+  transform: scale(1.04);
+}
+
+/* Video thumbnails */
+
+.memory-video-thumb {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+
+  color: white;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255, 143, 184, 0.2),
+      transparent 65%
+    ),
+    linear-gradient(145deg, #28162e, #171020);
+}
+
+.memory-video-thumb svg {
+  width: 54px;
+  height: 54px;
+  padding: 15px;
+
+  color: white;
+  background: rgba(255, 143, 184, 0.23);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+
+  transition: transform 0.3s ease;
+}
+
+.memory-media-card:hover .memory-video-thumb svg {
+  transform: scale(1.1);
+}
+
+.memory-video-thumb span {
+  color: var(--memory-pink-light);
+  font-size: 12px;
+  letter-spacing: 0.5px;
+}
+
+/* =========================================
+   FULL-SCREEN PHOTO / VIDEO VIEWER
+   ========================================= */
+
+.memory-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 70px 90px;
+
+  background: rgba(9, 6, 14, 0.96);
+  backdrop-filter: blur(15px);
+
+  animation: memoryFadeIn 0.25s ease;
+}
+
+.lightbox-media {
+  display: block;
+
+  max-width: 100%;
+  max-height: 82vh;
+  width: auto;
+  height: auto;
+
+  object-fit: contain;
+  border-radius: 12px;
+
+  box-shadow: 0 20px 80px rgba(0, 0, 0, 0.45);
+}
+
+/* Close button */
+
+.memories-page .lightbox-close {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  z-index: 2;
+
+  width: 46px;
+  height: 46px;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+.memories-page .lightbox-close:hover {
+  transform: rotate(90deg);
+  background: rgba(255, 143, 184, 0.22);
+}
+
+/* Previous and next buttons */
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+
+  width: 48px;
+  height: 48px;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+
+  cursor: pointer;
+  transform: translateY(-50%);
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.lightbox-nav:hover {
+  background: rgba(255, 143, 184, 0.2);
+  border-color: rgba(255, 143, 184, 0.45);
+}
+
+.lightbox-prev {
+  left: 25px;
+}
+
+.lightbox-next {
+  right: 25px;
+}
+
+.lightbox-prev:hover {
+  transform: translate(-3px, -50%);
+}
+
+.lightbox-next:hover {
+  transform: translate(3px, -50%);
+}
+
+/* =========================================
+   ANIMATIONS
+   ========================================= */
+
+@keyframes memoryFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 1000px) {
+  .memories-page {
+    padding: 28px 4%;
+  }
+
+  .memory-folder-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .memory-media-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .memory-lightbox {
+    padding: 65px;
+  }
+}
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+  .memories-page {
+    padding: 20px 16px 35px;
+  }
+
+  .memories-header {
+    margin-bottom: 30px;
+  }
+
+  .memories-page .back-button {
+    margin-bottom: 28px;
+    padding: 10px 14px;
+    font-size: 12px;
+  }
+
+  .memories-heading .eyebrow {
+    font-size: 9px;
+    letter-spacing: 2px;
+  }
+
+  .memories-heading h1 {
+    font-size: clamp(32px, 9vw, 44px);
+    letter-spacing: -0.5px;
+  }
+
+  .memories-heading > p:last-child {
+    font-size: 12px;
+    line-height: 1.8;
+  }
+
+  .memory-folder-grid {
+    grid-template-columns: 1fr;
+    gap: 17px;
+  }
+
+  .memory-folder-card {
+    padding: 10px;
+    border-radius: 18px;
+  }
+
+  .memory-folder-cover {
+    aspect-ratio: 4 / 3;
+    height: auto;
+  }
+
+  .memory-folder-info {
+    padding: 15px 6px 8px;
+  }
+
+  .memory-folder-info h2 {
+    font-size: 20px;
+  }
+
+  .memory-folder-info p {
+    font-size: 11px;
+  }
+
+  .memory-media-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 11px;
+  }
+
+  .memory-media-card {
+    aspect-ratio: 3 / 4;
+    border-radius: 12px;
+  }
+
+  .memory-empty-state {
+    margin: 25px auto 45px;
+    padding: 38px 20px;
+    border-radius: 18px;
+  }
+
+  .memory-empty-state h2 {
+    font-size: 24px;
+  }
+
+  .memory-empty-state p {
+    font-size: 12px;
+  }
+
+  .memory-lightbox {
+    padding: 65px 12px;
+  }
+
+  .lightbox-media {
+    max-width: 100%;
+    max-height: 72vh;
+    border-radius: 8px;
+  }
+
+  .memories-page .lightbox-close {
+    top: 12px;
+    right: 12px;
+    width: 42px;
+    height: 42px;
+  }
+
+  .lightbox-nav {
+    top: auto;
+    bottom: 15px;
+    width: 43px;
+    height: 43px;
+    transform: none;
+  }
+
+  .lightbox-prev {
+    left: calc(50% - 55px);
+  }
+
+  .lightbox-next {
+    right: calc(50% - 55px);
+  }
+
+  .lightbox-prev:hover,
+  .lightbox-next:hover {
+    transform: scale(1.05);
+  }
+}
+
+/* =========================================
+   VERY SMALL PHONES
+   ========================================= */
+
+@media (max-width: 360px) {
+  .memories-page {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .memory-media-grid {
+    gap: 8px;
+  }
+
+  .memory-folder-info h2 {
+    font-size: 18px;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .memories-page *,
+  .memories-page *::before,
+  .memories-page *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =========================================
+   COMPATIBILITY WITH MEMORIES.JSX
+   ========================================= */
+
+.memories-container,
+.memory-inside-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.memories-page .memories-back {
+  position: relative;
+  z-index: 5;
+}
+
+.memories-page .folder-cover {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 15px;
+  background: #24152d;
+}
+
+.memories-page .folder-cover > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s ease;
+}
+
+.memories-page .memory-folder-card:hover .folder-cover > img {
+  transform: scale(1.05);
+}
+
+.memories-page .folder-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--memory-pink-light);
+  background:
+    radial-gradient(
+      circle,
+      rgba(255, 143, 184, 0.16),
+      transparent 70%
+    ),
+    #211329;
+}
+
+.memories-page .folder-decoration {
+  position: absolute;
+  right: 20px;
+  bottom: 16px;
+  font-size: 27px;
+}
+
+.memories-page .folder-open-label {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  padding: 8px 11px;
+  color: white;
+  background: rgba(20, 10, 25, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  font-size: 9px;
+  letter-spacing: 1px;
+}
+
+.memories-page .folder-card-info {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 17px 8px 10px;
+  text-align: left;
+}
+
+.memories-page .folder-card-info h2 {
+  margin: 0 0 7px;
+  color: var(--memory-text);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 20px;
+}
+
+.memories-page .folder-card-info p {
+  margin: 0;
+  color: var(--memory-muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.memories-page .folder-heart {
+  flex-shrink: 0;
+  margin-top: 4px;
+  color: var(--memory-pink);
+}
+
+.memories-page .memories-footer {
+  margin: 45px 0 10px;
+  color: var(--memory-muted);
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+.memories-page .memories-footer span {
+  color: var(--memory-pink);
+}
+
+.memories-page .inside-heading {
+  margin: 0 auto 35px;
+  text-align: center;
+}
+
+.memories-page .inside-heading .eyebrow {
+  color: var(--memory-pink);
+  font-size: 11px;
+  letter-spacing: 3px;
+}
+
+.memories-page .inside-heading h1 {
+  margin: 12px 0;
+  color: var(--memory-text);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(32px, 5vw, 55px);
+}
+
+.memories-page .inside-heading > p:last-child {
+  color: var(--memory-muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.memories-page .empty-memory-state {
+  max-width: 620px;
+  margin: 35px auto;
+  padding: 45px 25px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 22px;
+}
+
+.memories-page .empty-memory-icon {
+  margin-bottom: 18px;
+  color: var(--memory-pink);
+}
+
+.memories-page .empty-memory-state h2 {
+  color: var(--memory-text);
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 26px;
+}
+
+.memories-page .empty-memory-state > p {
+  color: var(--memory-muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.memories-page .empty-memory-hints {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 22px;
+}
+
+.memories-page .empty-memory-hints span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--memory-pink-light);
+  font-size: 12px;
+}
+
+.memories-page .video-thumbnail {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #211329;
+}
+
+.memories-page .video-thumbnail video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.memories-page .video-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  padding-left: 3px;
+  color: white;
+  background: rgba(255, 143, 184, 0.8);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.memories-page .media-title {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 25px 12px 10px;
+  overflow: hidden;
+  color: white;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+  font-size: 12px;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.memories-page .lightbox-arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+.memories-page .lightbox-prev {
+  left: 25px;
+}
+
+.memories-page .lightbox-next {
+  right: 25px;
+}
+
+.memories-page .lightbox-caption {
+  position: absolute;
+  right: 70px;
+  bottom: 18px;
+  left: 70px;
+  color: white;
+  text-align: center;
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  .memories-page .folder-card-info h2 {
+    font-size: 18px;
+  }
+
+  .memories-page .lightbox-prev {
+    left: 12px;
+  }
+
+  .memories-page .lightbox-next {
+    right: 12px;
+  }
+
+  .memories-page .lightbox-caption {
+    right: 60px;
+    bottom: 18px;
+    left: 60px;
+  }
+}
