@@ -353,24 +353,22 @@ export default function Cake({ onBack }) {
             </div>
 
             <h1 className="final-title">
-              My World Is <span>More Beautiful</span>
-              <br />
-              With You ❤️
+              My World Is <span>More Beautiful</span>With You ❤️
             </h1>
 
             <p className="final-message">
-              Pari, I made this little world just for you,
+              Babbyyy 💕💖 , I made this little world just for you 💞,
               <br />
-              filled with memories and moments
+              filled with memories and moments 💞 ,
               <br />
-              that mean so much to me.
+              that mean soooo muchhhh to me. 💕🤞😚
               <br />
               <br />
-              I hope this little surprise brings
+              I hope this little surprise brings, 🤗
               <br />
-              a smile to your face today
+              a smile to your face today..   😘🤗💘
               <br />
-              and whenever you remember it. 💗
+              and whenever you remember it. 💘💗
             </p>
 
             <div className="final-divider">
@@ -380,11 +378,12 @@ export default function Cake({ onBack }) {
             </div>
 
             <p className="final-signature">
-              Happy Birthday, Pari! 🎂
+              Happy Birthday, Wifey ! 🎂💘
             </p>
 
             <p className="final-forever">
-              Made with love, just for you.
+              Made with love, just for you. 💘😘🤗
+              <br />
             </p>
 
             <button

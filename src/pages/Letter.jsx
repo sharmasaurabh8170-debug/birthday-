@@ -238,7 +238,9 @@ const handleOpenLetter = () => {
 
                 <h2>
                  
-                <nav>your bacha❤️..</nav>
+                <nav>
+                  your bacha❤️..
+                  </nav>
                 </h2>
 
               </div>
@@ -256,14 +258,14 @@ const handleOpenLetter = () => {
     className="close-letter-button"
     onClick={() => setOpened(false)}
   >
-    Read it again
+    Read it again 😋❤️
   </button>
 
   <button
     className="back-button letter-mobile-back"
     onClick={onBack}
   >
-    ← Back to Home
+    ← Back to Home ❤️
   </button>
 </div>
         </section>
