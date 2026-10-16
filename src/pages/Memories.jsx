@@ -21,6 +21,11 @@ const memoryFolders = [
     cover: "/memories/little-baby/cover.jpg",
     photos: [
        {
+        src: "/memories/little-baby/cover.jpg",
+        type: "photo",
+        
+         },
+      {
         src: "/memories/little-baby/photo1.jpg",
         type: "photo",
         
@@ -55,19 +60,131 @@ const memoryFolders = [
         type: "photo",
         
          },
+        { src: "/memories/little-baby/photo8.jpg",
+        type: "photo",
+        
+         },
 
     ],
     videos: [],
     icon: "♡",
   },
+
   {
-    id: "our moments ",
-    title: "Our Favorite Moments",
-    description: "Little moments I'll always remember 🤗👻.",
+    id: "Second",
+    title: "wife material 💕",
+    description: "🤞💕",
+    path: "/memories/my wifey",
+    cover: "/memories/my wifey/cover.jpg",
+    photos: [
+        {
+        src: "/memories/my wifey/cover.jpg",
+        type: "photo",
+         },
+      {
+        src: "/memories/my wifey/photo1.jpg",
+        type: "photo",
+         },
+          {
+        src: "/memories/my wifey/photo3.jpg",
+        type: "photo",
+         },
+          {
+        src: "/memories/my wifey/photo4.jpg",
+        type: "photo",
+         },
+          {
+        src: "/memories/my wifey/photo5.jpg",
+        type: "photo",
+         },
+          {
+        src: "/memories/my wifey/photo6.jpg",
+        type: "photo",
+         },
+       
+         {
+           src: "/memories/my wifey/photo7.jpg",
+        type: "photo",
+         },
+         {
+           src: "/memories/my wifey/photo8.jpg",
+        type: "photo",
+         },
+         {
+           src: "/memories/my wifey/photo9.jpg",
+        type: "photo",
+         },
+         {
+           src: "/memories/my wifey/photo10.jpg",
+        type: "photo",
+         },
+         {
+           src: "/memories/my wifey/photo11.jpg",
+        type: "photo",
+         },
+         {
+           src: "/memories/my wifey/photo12.jpg",
+        type: "photo",
+         },
+         {
+           src: "/memories/my wifey/photo13.jpg",
+        type: "photo",
+         },
+         {
+           src: "/memories/my wifey/photo14.jpg",
+        type: "photo",
+         },
+         {
+           src: "/memories/my wifey/photo15.jpg",
+        type: "photo",
+         },
+         {
+           src: "/memories/my wifey/phot016.jpg",
+        type: "photo",
+         },
+         {
+           src: "/memories/my wifey/photo17.jpg",
+        type: "photo",
+         },
+         {
+           src: "/memories/my wifey/photo18.jpg",
+        type: "photo",
+         },
+         {
+           src: "/memories/my wifey/photo19.jpg",
+        type: "photo",
+         },
+         {
+           src: "/memories/my wifey/photo20.jpg",
+        type: "photo",
+         },
+         {
+           src: "/memories/my wifey/photo21.jpg",
+        type: "photo",
+         },
+         {
+           src: "/memories/my wifey/photo22.jpg",
+        type: "photo",
+         },
+
+   ],
+    videos: [ ],
+    icon: "♡",
+  },
+        
+  {
+    id: "Fourth",
+    title: "When we are Together 🤞💕",
+    description: " 🤗👻.",
     path: "/memories/our moments",
     cover: "/memories/our moments/cover.jpg",
     photos: [
        {
+        src: "/memories/our moments/cover.jpg",
+        type: "photo",
+        
+       },
+      {
         src: "/memories/our moments/photo1.jpg",
         type: "photo",
         
@@ -129,8 +246,20 @@ const memoryFolders = [
         src: "/memories/our moments/photo12.jpg",
         type: "photo",
         
-       }, {
+       }, 
+       
+       {
         src: "/memories/our moments/photo13.jpg",
+        type: "photo",
+        
+       },
+       {
+        src: "/memories/our moments/photo14.jpg",
+        type: "photo",
+        
+       },
+       {
+        src: "/memories/our moments/photo15.jpg",
         type: "photo",
         
        },
@@ -167,11 +296,47 @@ const memoryFolders = [
         type: "video",
         
        },
+       {
+        src: "/memories/our moments/video7.mp4",
+        type: "video",
+        
+       },
+       {
+        src: "/memories/our moments/video8.mp4",
+        type: "video",
+        
+       },
+       {
+        src: "/memories/our moments/video9.mp4",
+        type: "video",
+        
+       },
+       {
+        src: "/memories/our moments/video10.mp4",
+        type: "video",
+        
+       },
+       {
+        src: "/memories/our moments/video11.mp4",
+        type: "video",
+        
+       },
+       {
+        src: "/memories/our moments/video12.mp4",
+        type: "video",
+        
+       },
+       {
+        src: "/memories/our moments/video13.mp4",
+        type: "video",
+        
+       },
+
     ],
     icon: "✦",
   },
   {
-    id: "cutiepie",
+    id: "Third",
     title: "Cutiepie ❤️",
     description: "My favorite person and my favorite memories.",
     path: "/memories/cutiepie",
@@ -249,11 +414,22 @@ const memoryFolders = [
         src: "/memories/cutiepie/photo14.jpg",
         type: "photo",
         
-      },{
+      },
+      {
         src: "/memories/cutiepie/photo15.jpg",
         type: "photo",
         
-      }
+      },
+      {
+        src: "/memories/cutiepie/photo16.jpg",
+        type: "photo",
+        
+      },
+      {
+        src: "/memories/cutiepie/photo17.jpg",
+        type: "photo",
+        
+      },
      
     ],
     videos: [
@@ -269,12 +445,22 @@ const memoryFolders = [
     { src: "/memories/cutiepie/video4.mp4",
         type: "video",
     },
+    { src: "/memories/cutiepie/video5.mp4",
+        type: "video",
+    },
+    { src: "/memories/cutiepie/video6.mp4",
+        type: "video",
+    },
+    { src: "/memories/cutiepie/video7.mp4",
+        type: "video",
+    },
+
     ],
     icon: "❤️",
   },
  
   {
-    id: "Random moments",
+    id: "Fifth",
     title: "Random Moments",
     description: "Privacy, vo nhi hoti hum dono m 😁👻.",
     path: "/memories/little-moments",
