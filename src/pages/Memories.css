@@ -1503,3 +1503,408 @@
     animation: none !important;
   }
 }
+/* =========================================
+   MOBILE SCRAPBOOK SIZE FIX
+   Add this at the VERY END of Memories.css
+   ========================================= */
+
+@media (max-width: 600px) {
+  .memories-page {
+    padding: 12px 8px 28px;
+  }
+
+  /* Make the scrapbook cover bigger */
+  .scrapbook-page .scrapbook-cover {
+    width: 100%;
+    max-width: 370px;
+    min-height: 440px;
+    padding: 32px 20px;
+  }
+
+  /* Improve heading readability */
+  .scrapbook-heading h1 {
+    font-size: clamp(30px, 8vw, 38px);
+  }
+
+  .scrapbook-heading > p:last-child {
+    font-size: 13px;
+  }
+
+  /* Give the open scrapbook more height */
+  .scrapbook-page .scrapbook-book {
+    min-height: 410px;
+    padding: 8px;
+  }
+
+  /* Make both paper pages larger */
+  .scrapbook-page .scrapbook-paper {
+    min-height: 400px;
+    padding: 12px 9px;
+  }
+
+  /* Improve page headings */
+  .scrapbook-paper-header {
+    gap: 3px;
+    font-size: 9px;
+    letter-spacing: 0.5px;
+  }
+
+  .scrapbook-paper-header span:last-child {
+    font-size: 15px;
+  }
+
+  /* Give photos more space */
+  .scrapbook-photo-grid {
+    min-height: 310px;
+    grid-template-rows: repeat(2, minmax(0, auto));
+    gap: 20px 7px;
+    padding: 17px 2px 30px;
+  }
+
+  .scrapbook-page .scrapbook-photo {
+    width: 100%;
+    padding: 5px 5px 8px;
+  }
+
+  /* Bigger photo frames */
+  .scrapbook-photo-frame {
+    height: clamp(85px, 25vw, 125px);
+  }
+
+  /* Make captions readable */
+  .scrapbook-photo-caption {
+    min-height: 28px;
+    margin-top: 6px;
+    font-size: 10px;
+    line-height: 1.4;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .scrapbook-photo-heart {
+    font-size: 13px;
+  }
+
+  /* Footer */
+  .scrapbook-paper-footer {
+    right: 8px;
+    bottom: 8px;
+    left: 8px;
+    font-size: 8px;
+  }
+
+  /* Navigation buttons */
+  .scrapbook-navigation {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .scrapbook-navigation > button {
+    min-height: 42px;
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .scrapbook-page-dots {
+    max-width: 130px;
+  }
+
+  /* Larger collage cover photos */
+  .scrapbook-collage-cover {
+    min-height: 610px;
+    padding: 32px 12px 24px;
+  }
+
+  .cover-photo-collage {
+    width: 100%;
+    max-width: 360px;
+    height: 330px;
+  }
+
+  .cover-polaroid-main {
+    width: 190px;
+    height: 232px;
+  }
+
+  .cover-polaroid-main img {
+    height: 181px;
+  }
+
+  .cover-polaroid-small {
+    width: 105px;
+    height: 128px;
+  }
+
+  .cover-polaroid-small img {
+    height: 90px;
+  }
+}
+
+/* Extra adjustments for very narrow phones */
+@media (max-width: 360px) {
+  .scrapbook-page .scrapbook-book {
+    padding: 5px;
+  }
+
+  .scrapbook-page .scrapbook-paper {
+    padding-right: 6px;
+    padding-left: 6px;
+  }
+
+  .scrapbook-photo-grid {
+    gap: 18px 5px;
+  }
+
+  .scrapbook-photo-frame {
+    height: 80px;
+  }
+
+  .scrapbook-photo-caption {
+    font-size: 9px;
+  }
+
+  .scrapbook-navigation > button {
+    padding: 7px 9px;
+    font-size: 11px;
+  }
+
+  .cover-polaroid-main {
+    width: 165px;
+    height: 210px;
+  }
+
+  .cover-polaroid-main img {
+    height: 160px;
+  }
+
+  .cover-polaroid-small {
+    width: 88px;
+    height: 112px;
+  }
+
+  .cover-polaroid-small img {
+    height: 77px;
+  }
+}
+
+/* =====================================
+   SCRAPBOOK MOBILE TEXT SIZE FIX
+   ========================================= */
+
+@media (max-width: 600px) {
+
+  /* Main scrapbook heading */
+  .scrapbook-heading h1 {
+    font-size: 36px;
+    line-height: 1.25;
+  }
+
+  .scrapbook-heading .eyebrow {
+    font-size: 11px;
+    letter-spacing: 1.5px;
+  }
+
+  .scrapbook-heading > p:last-child {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* Text at the top of each scrapbook page */
+  .scrapbook-paper-header {
+    font-size: 10px;
+    line-height: 1.5;
+    letter-spacing: 0.3px;
+  }
+
+  .scrapbook-paper-header span:last-child {
+    font-size: 17px;
+  }
+
+  /* Photo captions */
+  .scrapbook-photo-caption {
+    font-size: 11px;
+    line-height: 1.5;
+    min-height: 32px;
+  }
+
+  /* Footer text */
+  .scrapbook-paper-footer {
+    font-size: 9px;
+    line-height: 1.4;
+  }
+
+  /* Navigation buttons */
+  .scrapbook-navigation > button {
+    font-size: 13px;
+  }
+
+  /* Note below the scrapbook */
+  .scrapbook-page-note {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  /* Cover title */
+  .scrapbook-page .scrapbook-cover-title {
+    font-size: 44px;
+    line-height: 1.2;
+  }
+
+  .scrapbook-page .scrapbook-small-title {
+    font-size: 21px;
+  }
+
+  .scrapbook-page .scrapbook-cover-note {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .scrapbook-intro {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  .scrapbook-open-button {
+    font-size: 14px;
+  }
+
+  /* Text on the collage cover */
+  .scrapbook-collage-cover .scrapbook-small-title {
+    font-size: 22px;
+  }
+
+  .scrapbook-collage-cover .scrapbook-cover-title {
+    font-size: 36px;
+  }
+
+  .scrapbook-collage-cover .scrapbook-cover-note {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .cover-polaroid p {
+    font-size: 11px;
+  }
+}
+
+/* Extra adjustment for very narrow phones */
+@media (max-width: 360px) {
+  .scrapbook-heading h1 {
+    font-size: 32px;
+  }
+
+  .scrapbook-photo-caption {
+    font-size: 10px;
+  }
+
+  .scrapbook-paper-header {
+    font-size: 9px;
+  }
+
+  .scrapbook-page-note {
+    font-size: 12px;
+  }
+}
+
+/* =========================================
+   SINGLE-PAGE SCRAPBOOK — MOBILE
+   ========================================= */
+
+@media (max-width: 600px) {
+
+  /* Turn the two-page book into one full-width page */
+  .scrapbook-page .scrapbook-book {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-height: 0;
+    padding: 8px;
+    background: #eac0d0;
+    perspective: none;
+    transform-style: flat;
+  }
+
+  /* Hide the centre binding */
+  .scrapbook-page .scrapbook-binding {
+    display: none;
+  }
+
+  /* Hide the opposite page */
+  .scrapbook-page .scrapbook-right-page {
+    display: none;
+  }
+
+  /* Let the left page fill the whole book */
+  .scrapbook-page .scrapbook-left-page {
+    display: block;
+    width: 100%;
+    min-height: 0;
+    padding: 18px 14px 45px;
+    border: 1px solid #e9d3c5;
+    border-radius: 5px;
+    transform: none;
+    box-shadow: inset 0 0 18px rgba(164, 112, 95, 0.07);
+  }
+
+  /* Make the page content taller and easier to read */
+  .scrapbook-paper-header {
+    font-size: 11px;
+    padding-bottom: 10px;
+  }
+
+  /* Larger photo grid */
+  .scrapbook-photo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto;
+    gap: 22px 14px;
+    min-height: 0;
+    padding: 22px 4px 35px;
+  }
+
+  /* Larger Polaroid photos */
+  .scrapbook-page .scrapbook-photo {
+    width: 100%;
+    max-width: none;
+    padding: 7px 7px 10px;
+  }
+
+  .scrapbook-photo-frame {
+    height: clamp(120px, 36vw, 190px);
+  }
+
+  /* Readable captions */
+  .scrapbook-photo-caption {
+    min-height: 32px;
+    margin-top: 8px;
+    font-size: 12px;
+    line-height: 1.5;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .scrapbook-photo-heart {
+    font-size: 15px;
+  }
+
+  .scrapbook-paper-footer {
+    right: 12px;
+    bottom: 12px;
+    left: 12px;
+    font-size: 9px;
+  }
+
+  /* Keep the page-turn effect from covering the single page */
+  .scrapbook-page .scrapbook-turn-leaf {
+    width: calc(100% - 16px);
+  }
+
+  .scrapbook-page .scrapbook-turn-leaf.turn-leaf-prev {
+    left: 8px;
+  }
+
+  /* Better spacing for navigation */
+  .scrapbook-navigation {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+}

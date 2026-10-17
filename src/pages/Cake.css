@@ -1,45 +1,489 @@
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap');
-
 /* =========================================
-   ROMANTIC VINTAGE BIRTHDAY THEME
-   Strawberry cake + caramel teddy
+   REALISTIC CAKE CUT ANIMATION
+   Add this at the END of Cake.css
    ========================================= */
 
-.cake-page {
-  --cake-bg: #fff8f6;
-  --cake-pink: #eab0c3;
-  --cake-pink-dark: #c97896;
-  --cake-soft-pink: #f9e1e8;
-  --cake-white: #fffaf4;
-  --cake-text: #684b52;
-  --cake-lavender: #f5e5ec;
-  --cake-border: #ead0d6;
-  --cake-caramel: #b9825b;
-  --cake-chocolate: #51352e;
+/* Keep the cake and knife inside a controlled animation area */
 
+.cake-page .birthday-cake {
+  isolation: isolate;
+  overflow: visible;
+}
+
+/* Make the cake layers animate smoothly */
+
+.cake-page .cake-top,
+.cake-page .cake-middle,
+.cake-page .cake-bottom {
+  transition:
+    transform 0.7s ease,
+    filter 0.7s ease;
+}
+
+/* The knife starts above the cake */
+
+.cake-page .cake-knife {
+  position: absolute;
+  top: -32px;
+  left: 54%;
+  z-index: 8;
+  width: 25px;
+  height: 120px;
+  transform: rotate(25deg);
+  transform-origin: 50% 10%;
+  pointer-events: none;
+  animation: knifeCutThrough 1.9s ease-in-out both;
+}
+
+/* Metallic blade */
+
+.cake-page .knife-blade {
+  position: absolute;
+  top: 0;
+  left: 4px;
+  width: 17px;
+  height: 78px;
+  border: 1px solid #c6b9bb;
+  border-radius: 4px 4px 10px 10px;
+  background: linear-gradient(
+    90deg,
+    #c7c1c3 0%,
+    #fffdfd 35%,
+    #d8cfd1 65%,
+    #a9a0a2 100%
+  );
+  clip-path: polygon(0 0, 100% 0, 100% 78%, 50% 100%, 0 78%);
+  box-shadow: 2px 3px 5px rgba(70, 40, 45, 0.15);
+}
+
+/* Pink handle */
+
+.cake-page .knife-handle {
+  position: absolute;
+  top: 70px;
+  left: 5px;
+  width: 15px;
+  height: 43px;
+  border: 1px solid #a75e78;
+  border-radius: 5px 5px 8px 8px;
+  background: linear-gradient(
+    90deg,
+    #b86d89,
+    #f0b7cb,
+    #c97896
+  );
+  box-shadow: 2px 3px 5px rgba(70, 40, 45, 0.16);
+}
+
+/* A visible cut across the cake */
+
+.cake-page .cake-cut-line {
+  position: absolute;
+  top: 90px;
+  left: 50%;
+  z-index: 5;
+  width: 5px;
+  height: 90px;
+  border-radius: 5px;
+  background: linear-gradient(
+    180deg,
+    #b65e7d,
+    #fff1f5,
+    #b65e7d
+  );
+  box-shadow: 0 0 7px rgba(182, 94, 125, 0.35);
+  opacity: 0;
+  transform: translateX(-50%) scaleY(0);
+  transform-origin: top;
+  animation: revealCakeCut 1.9s ease-in-out both;
+  pointer-events: none;
+}
+
+.cake-page .cake-cut-line.cut-line-complete {
+  opacity: 1;
+  transform: translateX(-50%) scaleY(1);
+  animation: none;
+}
+
+/* Move the slice away after cutting */
+
+.cake-page .cake-slice {
+  top: 110px;
+  right: -12px;
+  z-index: 7;
+  animation: sliceSeparate 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+/* Small movement gives the cake a freshly-cut appearance */
+
+.cake-page .cake-cutting .cake-top {
+  animation: icingCut 1.9s ease-in-out both;
+}
+
+.cake-page .cake-cutting .cake-middle {
+  animation: middleCut 1.9s ease-in-out both;
+}
+
+.cake-page .cake-cutting .cake-bottom {
+  animation: bottomCut 1.9s ease-in-out both;
+}
+
+/* Knife travels down through the cake */
+
+@keyframes knifeCutThrough {
+  0% {
+    top: -42px;
+    left: 48%;
+    transform: rotate(25deg);
+  }
+
+  35% {
+    top: 38px;
+    left: 51%;
+    transform: rotate(12deg);
+  }
+
+  68% {
+    top: 100px;
+    left: 53%;
+    transform: rotate(5deg);
+  }
+
+  100% {
+    top: 165px;
+    left: 55%;
+    transform: rotate(-8deg);
+    opacity: 0;
+  }
+}
+
+/* Reveal the cut in sync with the knife */
+
+@keyframes revealCakeCut {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) scaleY(0);
+  }
+
+  35% {
+    opacity: 0.9;
+    transform: translateX(-50%) scaleY(0.35);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translateX(-50%) scaleY(1);
+  }
+
+  100% {
+    opacity: 0.9;
+    transform: translateX(-50%) scaleY(1);
+  }
+}
+
+/* Subtle movement in each cake layer */
+
+@keyframes icingCut {
+  0%,
+  25%,
+  100% {
+    filter: none;
+  }
+
+  55% {
+    filter: brightness(1.04);
+  }
+}
+
+@keyframes middleCut {
+  0%,
+  35%,
+  100% {
+    transform: translateX(-50%);
+  }
+
+  65% {
+    transform: translateX(calc(-50% - 2px));
+  }
+}
+
+@keyframes bottomCut {
+  0%,
+  35%,
+  100% {
+    transform: translateX(-50%);
+  }
+
+  65% {
+    transform: translateX(calc(-50% + 2px));
+  }
+}
+
+/* The slice separates and settles beside the cake */
+
+@keyframes sliceSeparate {
+  0% {
+    opacity: 0;
+    transform: translate(-8px, -5px) scale(0.75);
+  }
+
+  70% {
+    opacity: 1;
+    transform: translate(12px, -12px) scale(1.04);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(8px, -8px) scale(1);
+  }
+}
+
+/* Mobile adjustments */
+
+@media (max-width: 600px) {
+  .cake-page .birthday-cake {
+    transform: scale(0.9);
+    transform-origin: top center;
+    margin-bottom: 10px;
+  }
+
+  .cake-page .cake-knife {
+    transform-origin: 50% 10%;
+  }
+
+  .cake-page .cake-slice {
+    right: -5px;
+  }
+
+  .cake-page .cake-cut-line {
+    width: 4px;
+  }
+}
+
+/* Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+  .cake-page .cake-knife,
+  .cake-page .cake-cut-line,
+  .cake-page .cake-cutting .cake-top,
+  .cake-page .cake-cutting .cake-middle,
+  .cake-page .cake-cutting .cake-bottom,
+  .cake-page .cake-slice {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+/* Fix cake visibility and prevent unwanted clipping */
+.cake-page {
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.cake-page .cake-section {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.cake-page .birthday-cake {
   position: relative;
   isolation: isolate;
+  overflow: visible;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Keep the cake layers visible */
+.cake-page .cake-top,
+.cake-page .cake-middle,
+.cake-page .cake-bottom,
+.cake-page .cake-plate {
+  visibility: visible;
+}
+
+/* ==================================
+   RESTORE THE CAKE DESIGN
+   ================================== */
+
+.cake-page .birthday-cake {
+  position: relative;
+  width: 320px;
+  height: 250px;
+  margin: 35px auto 20px;
+  isolation: isolate;
+  overflow: visible;
+}
+
+/* Cake top icing */
+.cake-page .cake-top {
+  position: absolute;
+  top: 75px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240px;
+  height: 55px;
+  background: linear-gradient(180deg, #ffd9e5, #f4a8c4);
+  border: 3px solid #df86a7;
+  border-radius: 50% 50% 18% 18% / 45% 45% 20% 20%;
+  box-shadow: inset 0 -7px 0 rgba(210, 105, 145, 0.12);
+  z-index: 3;
+}
+
+/* Middle sponge layer */
+.cake-page .cake-middle {
+  position: absolute;
+  top: 110px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240px;
+  height: 55px;
+  background: linear-gradient(180deg, #ffe4bd, #f3bd82);
+  border: 3px solid #dc9b69;
+  border-radius: 8px 8px 15px 15px;
+  z-index: 2;
+}
+
+/* Bottom sponge layer */
+.cake-page .cake-bottom {
+  position: absolute;
+  top: 155px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 270px;
+  height: 55px;
+  background: linear-gradient(180deg, #ffcee0, #e88bad);
+  border: 3px solid #d7789b;
+  border-radius: 12px 12px 22px 22px;
+  box-shadow: 0 8px 12px rgba(120, 55, 80, 0.15);
+  z-index: 1;
+}
+
+/* Plate */
+.cake-page .cake-plate {
+  position: absolute;
+  top: 208px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 310px;
+  height: 22px;
+  background: linear-gradient(180deg, #fffaff, #edcbdc);
+  border: 2px solid #e2b3ca;
+  border-radius: 50%;
+  box-shadow: 0 7px 12px rgba(100, 50, 75, 0.12);
+  z-index: 0;
+}
+
+/* Decorations */
+.cake-page .cake-hearts {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #d84f83;
+  font-size: 19px;
+  white-space: nowrap;
+}
+
+.cake-page .cake-strawberry {
+  position: absolute;
+  top: -13px;
+  font-size: 25px;
+}
+
+.cake-page .strawberry-one {
+  left: 35px;
+}
+
+.cake-page .strawberry-two {
+  right: 35px;
+}
+
+/* Candles */
+.cake-page .candles {
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  width: 150px;
+  z-index: 4;
+}
+
+.cake-page .candle {
+  position: relative;
+  width: 12px;
+  height: 48px;
+  border-radius: 4px 4px 2px 2px;
+  background: repeating-linear-gradient(
+    135deg,
+    #fff6fb 0 6px,
+    #ec8db5 6px 12px
+  );
+  border: 1px solid #d779a0;
+}
+
+.cake-page .flame {
+  position: absolute;
+  top: -27px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 23px;
+  animation: cakeFlameFlicker 0.6s ease-in-out infinite alternate;
+}
+
+.cake-page .smoke {
+  position: absolute;
+  top: -27px;
+  left: -3px;
+  color: #a8a0aa;
+  font-size: 22px;
+  animation: cakeSmoke 1s ease-out infinite;
+}
+
+@keyframes cakeFlameFlicker {
+  from {
+    transform: translateX(-50%) rotate(-5deg) scale(0.95);
+  }
+  to {
+    transform: translateX(-50%) rotate(5deg) scale(1.08);
+  }
+}
+
+@keyframes cakeSmoke {
+  from {
+    opacity: 0.8;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+}
+
+/* Keep the cake centered on small screens */
+@media (max-width: 400px) {
+  .cake-page .birthday-cake {
+    transform: scale(0.85);
+    transform-origin: top center;
+    margin-bottom: -10px;
+  }
+}
+
+/* ==========================================
+   COMPLETE MOBILE RESPONSIVE IMPROVEMENTS
+   Cake + Teddy + Birthday Wish + Final Page
+   ========================================== */
+
+.cake-page {
+  width: 100%;
   min-height: 100vh;
-  overflow: hidden;
-  padding: 80px 24px 60px;
-
-  background:
-    radial-gradient(
-      circle at 15% 15%,
-      rgba(242, 180, 199, 0.2),
-      transparent 35%
-    ),
-    radial-gradient(
-      circle at 85% 75%,
-      rgba(245, 229, 236, 0.7),
-      transparent 35%
-    ),
-    var(--cake-bg);
-
-  color: var(--cake-text);
-  font-family: 'DM Sans', sans-serif;
-  text-align: center;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .cake-page *,
@@ -48,1129 +492,312 @@
   box-sizing: border-box;
 }
 
-/* =========================================
-   BACK BUTTON
-   ========================================= */
-
-.cake-page .back-button {
-  position: absolute;
-  top: 24px;
-  left: 24px;
-  z-index: 5;
-
-  padding: 10px 20px;
-  border: 1px solid var(--cake-border);
-  border-radius: 30px;
-
-  background: rgba(255, 250, 244, 0.95);
-  color: var(--cake-text);
-  font: inherit;
-
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.cake-page .back-button:hover {
-  background: var(--cake-soft-pink);
-  transform: translateY(-2px);
-}
-
-/* =========================================
-   BACKGROUND GLOW
-   ========================================= */
-
-.cake-page .cake-glow {
-  position: absolute;
-  z-index: -1;
-
-  width: 220px;
-  height: 220px;
-
-  border-radius: 50%;
-  background: rgba(242, 180, 199, 0.2);
-  filter: blur(65px);
-
-  pointer-events: none;
-}
-
-.cake-page .cake-glow-one {
-  top: 12%;
-  left: -100px;
-}
-
-.cake-page .cake-glow-two {
-  right: -100px;
-  bottom: 10%;
-  background: rgba(245, 229, 236, 0.75);
-}
-
-/* =========================================
-   SECTIONS AND TYPOGRAPHY
-   ========================================= */
-
+/* Main sections */
 .cake-page .cake-section,
-.cake-page .teddy-section {
-  position: relative;
-  z-index: 1;
-
-  width: min(100%, 760px);
-  margin: 0 auto;
-
-  animation: cakeFadeIn 0.7s ease both;
+.cake-page .teddy-section,
+.cake-page .final-surprise {
+  width: 100%;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
-.cake-page .teddy-section {
-  max-width: 650px;
-}
-
-.cake-page .eyebrow {
-  margin-bottom: 14px;
-
-  color: var(--cake-pink-dark);
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-}
-
+/* Headings and text */
 .cake-page .cake-heading,
-.cake-page .teddy-title,
-.cake-page .final-title {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-weight: 700;
+.cake-page .teddy-title {
+  font-size: clamp(2rem, 7vw, 3.2rem);
   line-height: 1.2;
-}
-
-.cake-page .cake-heading {
-  margin: 0 auto 16px;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  color: var(--cake-text);
-}
-
-.cake-page .cake-heading span,
-.cake-page .teddy-title span,
-.cake-page .final-title span {
-  color: var(--cake-pink-dark);
+  overflow-wrap: anywhere;
 }
 
 .cake-page .cake-intro,
 .cake-page .teddy-message {
-  color: var(--cake-text);
-  font-size: 1rem;
-  line-height: 1.9;
+  font-size: clamp(1rem, 3.8vw, 1.25rem);
+  line-height: 1.7;
 }
 
-.cake-page .teddy-title {
-  margin: 18px 0;
-  font-size: clamp(2rem, 5vw, 3rem);
-}
-
-.cake-page .teddy-message {
-  margin: 0 auto;
-}
-
-/* =========================================
-   BIRTHDAY CAKE ILLUSTRATION
-   ========================================= */
-
-.cake-page .birthday-cake {
-  position: relative;
-
-  width: 300px;
-  height: 260px;
-
-  margin: 55px auto 30px;
-  transition: transform 0.5s ease;
-}
-
-/* Candles */
-
-.cake-page .candles {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  z-index: 3;
-
-  display: flex;
-  gap: 27px;
-
-  transform: translateX(-50%);
-}
-
-.cake-page .candle {
-  position: relative;
-
-  width: 12px;
-  height: 48px;
-
-  border: 1px solid #e2b3c3;
-  border-radius: 5px 5px 2px 2px;
-
-  background: repeating-linear-gradient(
-    135deg,
-    #fffaf4 0 5px,
-    #e9a2bb 5px 10px
-  );
-}
-
-.cake-page .flame {
-  position: absolute;
-  top: -30px;
-  left: 50%;
-
-  font-size: 23px;
-
-  transform: translateX(-50%);
-  animation: flameFlicker 0.7s ease-in-out infinite alternate;
-}
-
-.cake-page .smoke {
-  position: absolute;
-  top: -27px;
-  left: 50%;
-
-  color: #c7a6b7;
-  font-size: 22px;
-
-  transform: translateX(-50%);
-  animation: smokeRise 1s ease-out both;
-}
-
-/* Top icing */
-
-.cake-page .cake-top {
-  position: absolute;
-  top: 48px;
-  left: 50%;
-  z-index: 2;
-
-  display: grid;
-  place-items: center;
-
-  width: 210px;
-  height: 55px;
-
-  overflow: visible;
-
-  border: 2px solid #e8b5c5;
-  border-radius: 50%;
-
-  background: linear-gradient(
-    135deg,
-    #fffaf4,
-    #f7c6d5,
-    #fff0f4
-  );
-
-  color: #bd6988;
-  font-size: 20px;
-
-  transform: translateX(-50%);
-}
-
-.cake-page .cake-hearts {
-  position: relative;
-  z-index: 1;
-}
-
-/* Floating strawberries */
-
-.cake-page .cake-strawberry {
-  position: absolute;
-  z-index: 3;
-
-  font-size: 21px;
-  line-height: 1;
-
-  filter: drop-shadow(0 2px 2px rgba(104, 75, 82, 0.12));
-
-  animation: strawberryFloat 3s ease-in-out infinite;
-}
-
-.cake-page .strawberry-one {
-  top: -12px;
-  left: 24px;
-
-  transform: rotate(-15deg);
-}
-
-.cake-page .strawberry-two {
-  top: -10px;
-  right: 24px;
-
-  animation-delay: 0.5s;
-}
-
-/* Middle cake layer */
-
-.cake-page .cake-middle {
-  position: absolute;
-  top: 72px;
-  left: 50%;
-
-  width: 210px;
-  height: 65px;
-
-  border: 2px solid #e2a4b9;
-  border-top: 0;
-  border-radius: 0 0 12px 12px;
-
-  background: linear-gradient(
-    90deg,
-    #df91ad,
-    #f8c9d8,
-    #df91ad
-  );
-
-  transform: translateX(-50%);
-}
-
-.cake-page .cake-middle::after {
-  position: absolute;
-  top: -1px;
-  left: 0;
-
-  width: 100%;
-  height: 16px;
-
-  border-radius: 50%;
-  background: var(--cake-white);
-
-  content: "";
-}
-
-/* Bottom cake layer */
-
-.cake-page .cake-bottom {
-  position: absolute;
-  top: 130px;
-  left: 50%;
-
-  width: 260px;
-  height: 70px;
-
-  border: 2px solid #df9bb2;
-  border-radius: 0 0 18px 18px;
-
-  background: linear-gradient(
-    90deg,
-    #d987a4,
-    #f1b5c8,
-    #d987a4
-  );
-
-  transform: translateX(-50%);
-}
-
-.cake-page .cake-bottom::before {
-  position: absolute;
-  top: -10px;
-  left: -2px;
-
-  width: calc(100% + 4px);
-  height: 24px;
-
-  border: 2px solid #df9bb2;
-  border-radius: 50%;
-  background: var(--cake-white);
-
-  content: "";
-}
-
-/* Cake plate */
-
-.cake-page .cake-plate {
-  position: absolute;
-  top: 195px;
-  left: 50%;
-
-  width: 290px;
-  height: 22px;
-
-  border: 2px solid var(--cake-border);
-  border-radius: 50%;
-
-  background: linear-gradient(
-    180deg,
-    #ffffff,
-    #f8e9ed
-  );
-
-  transform: translateX(-50%);
-}
-
-/* Cake animations */
-
-.cake-page .cake-cut {
-  animation: cakeCut 1.2s ease both;
-}
-
-.cake-page .cake-after-cut {
-  animation: cakeAfterCut 0.6s ease both;
-}
-
-/* Cake slice */
-
-.cake-page .cake-slice {
-  position: absolute;
-  top: 110px;
-  right: -20px;
-  z-index: 4;
-
-  width: 75px;
-  height: 75px;
-
-  animation: sliceReveal 0.6s ease both;
-}
-
-.cake-page .slice-icing {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-
-  display: grid;
-  place-items: center;
-
-  width: 75px;
-  height: 22px;
-
-  border-radius: 50%;
-  background: var(--cake-white);
-
-  color: var(--cake-pink-dark);
-}
-
-.cake-page .slice-layer {
-  position: absolute;
-  left: 0;
-
-  width: 75px;
-  height: 25px;
-
-  border: 1px solid var(--cake-border);
-  background: #e9a2bb;
-}
-
-.cake-page .slice-layer-top {
-  top: 15px;
-}
-
-.cake-page .slice-layer-bottom {
-  top: 38px;
-  background: #fff0e5;
-}
-
-.cake-page .slice-plate {
-  position: absolute;
-  top: 58px;
-  left: -5px;
-
-  width: 85px;
-  height: 12px;
-
-  border: 1px solid var(--cake-border);
-  border-radius: 50%;
-
-  background: linear-gradient(
-    180deg,
-    #ffffff,
-    #f8e9ed
-  );
-}
-
-/* =========================================
-   BUTTONS
-   ========================================= */
-
+/* Buttons */
 .cake-page .wish-button,
 .cake-page .cut-cake-button,
 .cake-page .make-wish-button,
 .cake-page .send-wish-button,
 .cake-page .final-reveal-button,
 .cake-page .final-replay-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
+  max-width: 100%;
   min-height: 48px;
-  margin-top: 18px;
-  padding: 13px 28px;
-
-  border: 1px solid transparent;
-  border-radius: 30px;
-
-  background: linear-gradient(
-    135deg,
-    #eab0c3,
-    #c97896
-  );
-
-  box-shadow: 0 8px 22px rgba(180, 108, 135, 0.17);
-
-  color: #ffffff;
-  font: inherit;
-  font-weight: 700;
-  letter-spacing: 0.01em;
-
+  padding: 14px 24px;
+  font-size: 1rem;
+  white-space: normal;
+  overflow-wrap: anywhere;
   cursor: pointer;
-
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease,
-    background 0.25s ease;
 }
 
-.cake-page .wish-button:hover,
-.cake-page .cut-cake-button:hover,
-.cake-page .make-wish-button:hover,
-.cake-page .send-wish-button:hover,
-.cake-page .final-reveal-button:hover,
-.cake-page .final-replay-button:hover {
-  box-shadow: 0 12px 26px rgba(180, 108, 135, 0.25);
-  transform: translateY(-3px);
+/* Cake display */
+.cake-page .birthday-cake {
+  position: relative;
+  width: 320px;
+  max-width: 100%;
+  margin: 35px auto 40px;
+  overflow: visible;
 }
 
-.cake-page button:disabled {
-  cursor: not-allowed;
-  opacity: 0.65;
+/* Teddy page */
+.cake-page .teddy-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding-top: 65px;
+  padding-bottom: 40px;
 }
-
-.cake-page button:disabled:hover {
-  transform: none;
-}
-
-.cake-page .cake-message {
-  margin-top: 24px;
-
-  color: var(--cake-pink-dark);
-  font-weight: 600;
-}
-
-/* =========================================
-   CARAMEL TEDDY BEAR
-   ========================================= */
 
 .cake-page .teddy {
-  position: relative;
-
-  width: 200px;
-  height: 220px;
-
-  margin: 35px auto 20px;
-
-  animation: teddyFloat 3s ease-in-out infinite;
+  transform: scale(1.12);
+  transform-origin: top center;
+  margin: 25px auto 50px;
+  flex-shrink: 0;
 }
 
-/* Ears */
-
-.cake-page .teddy-ear {
-  position: absolute;
-  top: 5px;
-
-  width: 53px;
-  height: 55px;
-
-  border: 2px solid #a67555;
-  border-radius: 50%;
-
-  background: linear-gradient(
-    145deg,
-    #dfb993,
-    #b9825b
-  );
+.cake-page .teddy-title {
+  margin-top: 10px;
 }
 
-.cake-page .teddy-ear-left {
-  left: 25px;
-}
-
-.cake-page .teddy-ear-right {
-  right: 25px;
-}
-
-/* Head */
-
-.cake-page .teddy-head {
-  position: absolute;
-  top: 20px;
-  left: 35px;
-  z-index: 2;
-
-  width: 130px;
-  height: 120px;
-
-  border: 2px solid #a67555;
-  border-radius: 48% 48% 45% 45%;
-
-  background: linear-gradient(
-    145deg,
-    #dfb993,
-    #b9825b
-  );
-}
-
-/* Teddy eyes */
-
-.cake-page .teddy-eye {
-  position: absolute;
-  top: 42px;
-
-  width: 9px;
-  height: 12px;
-
-  border-radius: 50%;
-  background: #39251f;
-}
-
-.cake-page .teddy-eye.left {
-  left: 35px;
-}
-
-.cake-page .teddy-eye.right {
-  right: 35px;
-}
-
-/* Teddy nose */
-
-.cake-page .teddy-nose {
-  position: absolute;
-  top: 61px;
-  left: 50%;
-
-  width: 19px;
-  height: 14px;
-
-  border-radius: 50% 50% 45% 45%;
-  background: var(--cake-chocolate);
-
-  transform: translateX(-50%);
-}
-
-/* Teddy smile */
-
-.cake-page .teddy-mouth {
-  position: absolute;
-  top: 75px;
-  left: 50%;
-
-  width: 22px;
-  height: 10px;
-
-  border-bottom: 2px solid var(--cake-chocolate);
-  border-radius: 50%;
-
-  transform: translateX(-50%);
-}
-
-/* Teddy body */
-
-.cake-page .teddy-body {
-  position: absolute;
-  bottom: 0;
-  left: 35px;
-
-  width: 130px;
-  height: 105px;
-
-  border: 2px solid #a67555;
-  border-radius: 48% 48% 40% 40%;
-
-  background: linear-gradient(
-    145deg,
-    #dfb993,
-    #b9825b
-  );
-}
-
-/* Heart on teddy */
-
-.cake-page .teddy-heart {
-  position: absolute;
-  top: 28px;
-  left: 50%;
-
-  color: #cf7999;
-  font-size: 38px;
-
-  transform: translateX(-50%);
-}
-
-/* Teddy arms */
-
-.cake-page .teddy-arm {
-  position: absolute;
-  top: 130px;
-  z-index: 3;
-
-  width: 42px;
-  height: 68px;
-
-  border: 2px solid #a67555;
-  border-radius: 50%;
-
-  background: linear-gradient(
-    145deg,
-    #dfb993,
-    #b9825b
-  );
-}
-
-.cake-page .teddy-arm-left {
-  left: 13px;
-  transform: rotate(25deg);
-}
-
-.cake-page .teddy-arm-right {
-  right: 13px;
-  transform: rotate(-25deg);
-}
-
-/* Optional teddy bow.
-   This appears when the matching JSX is added. */
-
-.cake-page .teddy-bow {
-  position: absolute;
-  top: -15px;
-  right: 12px;
-  z-index: 4;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.cake-page .teddy-bow span {
-  display: block;
-
-  width: 19px;
-  height: 15px;
-
-  border: 1px solid #bd6988;
-  background: #eab0c3;
-}
-
-.cake-page .teddy-bow span:first-child {
-  border-radius: 80% 20% 20% 80%;
-  transform: rotate(15deg);
-}
-
-.cake-page .teddy-bow span:nth-child(2) {
-  border-radius: 20% 80% 80% 20%;
-  transform: rotate(-15deg);
-}
-
-.cake-page .teddy-bow i {
-  position: absolute;
-
-  width: 8px;
-  height: 8px;
-
-  border-radius: 50%;
-  background: #bd6988;
-}
-
-/* =========================================
-   BIRTHDAY WISH BOX
-   ========================================= */
-
-.cake-page .wish-area {
-  margin-top: 24px;
+/* Birthday wish form */
+.cake-page .wish-area,
+.cake-page .wish-box {
+  width: 100%;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .cake-page .wish-box {
-  width: min(100%, 470px);
-  margin: 30px auto 0;
-  padding: 28px;
-
-  border: 1px solid var(--cake-border);
-  border-radius: 24px;
-
-  background: rgba(255, 250, 244, 0.96);
-
-  box-shadow: 0 14px 40px rgba(104, 75, 82, 0.08);
-
-  animation: cakeFadeIn 0.5s ease both;
-}
-
-.cake-page .wish-box h2 {
-  margin: 0 0 12px;
-
-  color: var(--cake-pink-dark);
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.8rem;
-}
-
-.cake-page .wish-box > p {
-  line-height: 1.7;
+  padding: clamp(18px, 5vw, 30px);
 }
 
 .cake-page .wish-box textarea {
-  display: block;
-
   width: 100%;
-  min-height: 140px;
-  margin-top: 18px;
-  padding: 15px;
-
-  resize: vertical;
-
-  border: 1px solid var(--cake-border);
-  border-radius: 15px;
-
-  outline: none;
-
-  background: #ffffff;
-  color: var(--cake-text);
-  font: inherit;
-  line-height: 1.7;
-
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
-}
-
-.cake-page .wish-box textarea:focus {
-  border-color: var(--cake-pink-dark);
-  box-shadow: 0 0 0 4px rgba(201, 120, 150, 0.13);
-}
-
-.cake-page .wish-box textarea::placeholder {
-  color: #b78b9f;
-}
-
-.cake-page .wish-character-count {
-  margin: 8px 0;
-
-  color: #a77c91;
-  font-size: 0.8rem;
-  text-align: right;
-}
-
-.cake-page .wish-status {
-  color: var(--cake-pink-dark);
-  font-size: 0.9rem;
-  font-weight: 600;
+  min-height: 130px;
+  max-width: 100%;
+  padding: 14px;
+  font-size: 16px;
   line-height: 1.6;
+  resize: vertical;
 }
 
-/* =========================================
-   FINAL BIRTHDAY SURPRISE
-   ========================================= */
+.cake-page .wish-box h2 {
+  font-size: clamp(1.5rem, 5vw, 2rem);
+}
 
+.cake-page .wish-box p {
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+/* Final surprise page */
 .cake-page .final-surprise {
-  position: relative;
-  z-index: 1;
-
-  display: grid;
-  place-items: center;
-
-  min-height: 75vh;
-
-  animation: cakeFadeIn 0.8s ease both;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 70px;
+  padding-bottom: 50px;
 }
 
 .cake-page .final-content {
-  position: relative;
-  z-index: 2;
-
-  width: min(100%, 760px);
-  padding: 45px 24px;
-
-  border: 1px solid var(--cake-border);
-  border-radius: 28px;
-
-  background: rgba(255, 250, 244, 0.94);
-
-  box-shadow: 0 18px 55px rgba(104, 75, 82, 0.09);
-
-  backdrop-filter: blur(8px);
-}
-
-.cake-page .final-eyebrow {
-  color: var(--cake-pink-dark);
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.2em;
-}
-
-.cake-page .final-heart {
-  margin: 20px 0;
-
-  color: var(--cake-pink-dark);
-  font-size: 80px;
-  line-height: 1.2;
-
-  text-shadow: 0 5px 20px rgba(201, 120, 150, 0.18);
-
-  animation: heartBeat 1.6s ease-in-out infinite;
+  width: 100%;
+  max-width: 720px;
+  margin: auto;
 }
 
 .cake-page .final-title {
-  margin: 0 auto 22px;
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: clamp(2rem, 7vw, 3.5rem);
+  line-height: 1.25;
+  overflow-wrap: anywhere;
 }
 
 .cake-page .final-message {
-  color: var(--cake-text);
-  font-size: 1rem;
-  line-height: 2;
+  font-size: clamp(1rem, 3.8vw, 1.25rem);
+  line-height: 1.9;
+  overflow-wrap: anywhere;
 }
 
-.cake-page .final-divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-
-  margin: 28px 0;
-
-  color: var(--cake-pink-dark);
-  font-size: 1.2rem;
+.cake-page .final-heart {
+  font-size: clamp(4rem, 16vw, 7rem);
 }
 
 .cake-page .final-signature {
-  color: var(--cake-pink-dark);
-  font-family: 'Playfair Display', Georgia, serif;
-  font-size: 1.6rem;
-  font-style: italic;
-  font-weight: 700;
+  font-size: clamp(1.3rem, 4.5vw, 2rem);
 }
 
 .cake-page .final-forever {
-  color: var(--cake-text);
-  line-height: 1.8;
+  font-size: clamp(1rem, 3.5vw, 1.2rem);
 }
 
-/* Floating decorative stars */
-
-.cake-page .final-stars {
-  position: absolute;
-  inset: 0;
-
-  overflow: hidden;
-
-  color: var(--cake-pink-dark);
-  pointer-events: none;
-}
-
-.cake-page .final-stars span {
-  position: absolute;
-
-  font-size: 25px;
-  opacity: 0.65;
-
-  animation: starFloat 5s ease-in-out infinite alternate;
-}
-
-.cake-page .final-stars span:nth-child(1) {
-  top: 10%;
-  left: 12%;
-}
-
-.cake-page .final-stars span:nth-child(2) {
-  top: 25%;
-  right: 12%;
-}
-
-.cake-page .final-stars span:nth-child(3) {
-  top: 65%;
-  left: 8%;
-}
-
-.cake-page .final-stars span:nth-child(4) {
-  right: 8%;
-  bottom: 15%;
-}
-
-.cake-page .final-stars span:nth-child(5) {
-  top: 8%;
-  right: 35%;
-}
-
-.cake-page .final-stars span:nth-child(6) {
-  bottom: 8%;
-  left: 35%;
-}
-
-.cake-page .final-stars span:nth-child(7) {
-  top: 48%;
-  right: 5%;
-}
-
-/* =========================================
-   ACCESSIBILITY
-   ========================================= */
-
-.cake-page button:focus-visible,
-.cake-page textarea:focus-visible {
-  outline: 3px solid rgba(201, 120, 150, 0.55);
-  outline-offset: 3px;
-}
-
-/* =========================================
-   ANIMATIONS
-   ========================================= */
-
-@keyframes cakeFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes flameFlicker {
-  from {
-    transform: translateX(-50%) rotate(-5deg) scale(0.95);
-  }
-
-  to {
-    transform: translateX(-50%) rotate(5deg) scale(1.08);
-  }
-}
-
-@keyframes smokeRise {
-  from {
-    opacity: 0.8;
-    transform: translate(-50%, 0);
-  }
-
-  to {
-    opacity: 0;
-    transform: translate(-50%, -24px);
-  }
-}
-
-@keyframes cakeCut {
-  0% {
-    transform: translateX(0);
-  }
-
-  50% {
-    transform: translateX(-5px) rotate(-2deg);
-  }
-
-  100% {
-    transform: translateX(0);
-  }
-}
-
-@keyframes cakeAfterCut {
-  from {
-    transform: scale(1);
-  }
-
-  to {
-    transform: scale(0.98);
-  }
-}
-
-@keyframes sliceReveal {
-  from {
-    opacity: 0;
-    transform: translate(0, 0) scale(0.8);
-  }
-
-  to {
-    opacity: 1;
-    transform: translate(8px, -8px) scale(1);
-  }
-}
-
-@keyframes teddyFloat {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-@keyframes heartBeat {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-
-  50% {
-    transform: scale(1.1);
-  }
-}
-
-@keyframes starFloat {
-  from {
-    transform: translateY(0) rotate(0);
-  }
-
-  to {
-    transform: translateY(-12px) rotate(12deg);
-  }
-}
-
-@keyframes strawberryFloat {
-  0%,
-  100% {
-    translate: 0 0;
-  }
-
-  50% {
-    translate: 0 -4px;
-  }
-}
-
-/* =========================================
-   RESPONSIVE DESIGN
-   ========================================= */
-
+/* Phone-specific adjustments */
 @media (max-width: 600px) {
-  .cake-page {
-    padding: 90px 18px 40px;
-  }
-
-  .cake-page .back-button {
-    top: 18px;
-    left: 18px;
+  .cake-page .cake-section {
+    padding-top: 65px;
+    padding-bottom: 35px;
   }
 
   .cake-page .birthday-cake {
-    transform: scale(0.9);
+    transform: scale(1.08);
     transform-origin: top center;
-    margin-bottom: 5px;
+    margin-bottom: 55px;
+  }
+
+  .cake-page .cake-knife {
+    max-width: none;
   }
 
   .cake-page .cake-slice {
-    right: -8px;
+    right: -5px;
   }
 
-  .cake-page .wish-box {
-    padding: 22px 18px;
+  .cake-page .teddy {
+    transform: scale(1.2);
+    margin-bottom: 60px;
+  }
+
+  .cake-page .teddy-section {
+    padding-top: 75px;
+  }
+
+  .cake-page .final-surprise {
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+
+  .cake-page .final-message br {
+    display: none;
+  }
+
+  .cake-page .final-title {
+    margin: 18px 0;
   }
 
   .cake-page .final-content {
-    padding: 35px 18px;
+    padding: 10px 0;
   }
 
-  .cake-page .final-message {
-    font-size: 0.92rem;
+  .cake-page .wish-box {
+    border-radius: 22px;
+  }
+
+  .cake-page .back-button {
+    z-index: 20;
   }
 }
 
-/* =========================================
-   REDUCED MOTION ACCESSIBILITY
-   ========================================= */
+/* Smaller phones */
+@media (max-width: 380px) {
+  .cake-page .cake-section,
+  .cake-page .teddy-section {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
 
+  .cake-page .birthday-cake {
+    transform: scale(0.98);
+    margin-bottom: 30px;
+  }
+
+  .cake-page .teddy {
+    transform: scale(1.05);
+    margin-bottom: 45px;
+  }
+
+  .cake-page .wish-button,
+  .cake-page .cut-cake-button,
+  .cake-page .make-wish-button,
+  .cake-page .send-wish-button,
+  .cake-page .final-reveal-button,
+  .cake-page .final-replay-button {
+    width: 100%;
+  }
+
+  .cake-page .final-surprise {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+/* Tablet and desktop: retain centered content */
+@media (min-width: 601px) {
+  .cake-page .cake-section,
+  .cake-page .teddy-section {
+    padding-top: 35px;
+    padding-bottom: 45px;
+  }
+}
+
+/* Accessibility */
 @media (prefers-reduced-motion: reduce) {
   .cake-page *,
   .cake-page *::before,
   .cake-page *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
+    scroll-behavior: auto;
+  }
+}
+
+/* ==========================================
+   BIGGER CSS TEDDY ON MOBILE
+   ========================================== */
+
+@media (max-width: 600px) {
+  .cake-page .teddy {
+    transform: scale(1.3);
+    transform-origin: top center;
+    margin: 35px auto 75px;
+  }
+
+  .cake-page .teddy-head {
+    transform-origin: center bottom;
+  }
+
+  .cake-page .teddy-title {
+    font-size: clamp(2rem, 8vw, 2.8rem);
+    margin-top: 15px;
+  }
+
+  .cake-page .teddy-message {
+    font-size: 1.15rem;
+    line-height: 1.8;
+  }
+
+  .cake-page .teddy-section {
+    padding: 75px 20px 45px;
+    text-align: center;
+  }
+
+  .cake-page .wish-area,
+  .cake-page .wish-box {
+    width: 100%;
+    max-width: 460px;
+    margin: 25px auto;
+  }
+
+  .cake-page .wish-box textarea {
+    width: 100%;
+    min-height: 140px;
+    font-size: 16px;
+  }
+}
+
+/* Smaller phones */
+@media (max-width: 380px) {
+  .cake-page .teddy {
+    transform: scale(1.15);
+    margin-bottom: 60px;
+  }
+
+  .cake-page .teddy-section {
+    padding-left: 14px;
+    padding-right: 14px;
   }
 }

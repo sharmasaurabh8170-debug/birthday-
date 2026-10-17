@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { supabase } from "../lib/supabase";
 import "./Cake.css";
 
@@ -12,10 +12,23 @@ export default function Cake({ onBack }) {
   const [wishSaved, setWishSaved] = useState(false);
   const [showFinal, setShowFinal] = useState(false);
 
+  const timers = useRef([]);
+
+  useEffect(() => {
+    return () => {
+      timers.current.forEach(clearTimeout);
+    };
+  }, []);
+
+  const addTimer = (callback, delay) => {
+    const timer = setTimeout(callback, delay);
+    timers.current.push(timer);
+  };
+
   const handleBlow = () => {
     setStep("blowing");
 
-    setTimeout(() => {
+    addTimer(() => {
       setStep("cut");
     }, 1000);
   };
@@ -23,9 +36,10 @@ export default function Cake({ onBack }) {
   const handleCut = () => {
     setStep("cutting");
 
-    setTimeout(() => {
+    // Knife moves through the cake and the slice separates.
+    addTimer(() => {
       setStep("bite");
-    }, 1200);
+    }, 1900);
   };
 
   const handleSaveWish = async () => {
@@ -136,8 +150,10 @@ export default function Cake({ onBack }) {
 
           <div
             className={`birthday-cake ${
-              step === "cutting" ? "cake-cut" : ""
-            } ${step === "bite" ? "cake-after-cut" : ""}`}
+              step === "cutting" ? "cake-cutting" : ""
+            } ${
+              step === "bite" ? "cake-after-cut" : ""
+            }`}
           >
             <div
               className={`candles ${
@@ -159,16 +175,49 @@ export default function Cake({ onBack }) {
               ))}
             </div>
 
-             <div className="cake-top">
-               <span className="cake-hearts">♥ ♥</span>
-                 <span className="cake-strawberry strawberry-one">🍓</span>
-                   <span className="cake-strawberry strawberry-two">🍓</span>
-                      </div>
+            {/* Cake decoration */}
 
+            <div className="cake-top">
+              <span className="cake-hearts">♥ ♥</span>
+              <span className="cake-strawberry strawberry-one">
+                🍓
+              </span>
+              <span className="cake-strawberry strawberry-two">
+                🍓
+              </span>
+            </div>
 
             <div className="cake-middle" />
             <div className="cake-bottom" />
+
+            {/* Visible cut through the cake */}
+
+            {["cutting", "bite"].includes(step) && (
+              <div
+                className={`cake-cut-line ${
+                  step === "bite" ? "cut-line-complete" : ""
+                }`}
+                aria-hidden="true"
+              />
+            )}
+
+            {/* Cake plate */}
+
             <div className="cake-plate" />
+
+            {/* Animated knife appears while cutting */}
+
+            {step === "cutting" && (
+              <div
+                className="cake-knife"
+                aria-hidden="true"
+              >
+                <div className="knife-blade" />
+                <div className="knife-handle" />
+              </div>
+            )}
+
+            {/* Slice appears after the cut */}
 
             {step === "bite" && (
               <div
@@ -203,7 +252,7 @@ export default function Cake({ onBack }) {
 
           {step === "cutting" && (
             <p className="cake-message">
-              Cutting your birthday cake... 🎂✨
+              Cutting your birthday cake... 🔪🎂✨
             </p>
           )}
 
@@ -319,7 +368,7 @@ export default function Cake({ onBack }) {
             </div>
           )}
 
-          {/* REVEAL FINALE AFTER SUCCESSFUL SAVE */}
+          {/* FINALE AFTER SUCCESSFUL SAVE */}
 
           {wishSaved && (
             <button
@@ -356,20 +405,20 @@ export default function Cake({ onBack }) {
             </div>
 
             <h1 className="final-title">
-              My World Is <span>More Beautiful</span>With You ❤️
+              My World Is <span>More Beautiful</span> With You ❤️
             </h1>
 
             <p className="final-message">
-              Babbyyy 💕💖 , I made this little world just for you 💞,
+              Babbyyy 💕💖, I made this little world just for you 💞,
               <br />
-              filled with memories and moments 💞 ,
+              filled with memories and moments 💞,
               <br />
               that mean soooo muchhhh to me. 💕🤞😚
               <br />
               <br />
-              I hope this little surprise brings, 🤗
+              I hope this little surprise brings 🤗
               <br />
-              a smile to your face today..   😘🤗💘
+              a smile to your face today.. 😘🤗💘
               <br />
               and whenever you remember it. 💘💗
             </p>
@@ -381,12 +430,11 @@ export default function Cake({ onBack }) {
             </div>
 
             <p className="final-signature">
-              Happy Birthday, Wifey ! 🎂💘
+              Happy Birthday, Wifey! 🎂💘
             </p>
 
             <p className="final-forever">
               Made with love, just for you. 💘😘🤗
-              <br />
             </p>
 
             <button
