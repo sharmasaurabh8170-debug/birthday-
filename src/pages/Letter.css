@@ -1,0 +1,1026 @@
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap");
+
+.letter-page {
+  --letter-pink: #c43f75;
+  --letter-deep: #792449;
+  --letter-soft: #fff0f5;
+  --letter-cream: #fffaf5;
+  --letter-text: #694454;
+
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  padding: 76px 22px 55px;
+  overflow: hidden;
+  color: var(--letter-text);
+  font-family: "DM Sans", sans-serif;
+  background:
+    radial-gradient(ellipse at 15% 15%, #ffe0ec 0, transparent 35%),
+    radial-gradient(ellipse at 90% 75%, #f9d9e9 0, transparent 38%),
+    linear-gradient(135deg, #fff7fa, #fff0f5 50%, #fff8f2);
+}
+
+.letter-page *,
+.letter-page *::before,
+.letter-page *::after {
+  box-sizing: border-box;
+}
+
+.letter-glow {
+  position: absolute;
+  z-index: -1;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(239, 143, 183, 0.22);
+  filter: blur(65px);
+  pointer-events: none;
+}
+
+.letter-glow-one {
+  top: 4%;
+  left: -130px;
+}
+
+.letter-glow-two {
+  right: -130px;
+  bottom: 4%;
+  background: rgba(217, 157, 199, 0.25);
+}
+
+.letter-back-button {
+  position: absolute;
+  z-index: 5;
+  top: 22px;
+  left: 22px;
+}
+
+.letter-page .back-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 43px;
+  padding: 10px 18px;
+  border: 1px solid rgba(196, 63, 117, 0.22);
+  border-radius: 999px;
+  color: var(--letter-deep);
+  background: rgba(255, 255, 255, 0.8);
+  font: 600 0.9rem "DM Sans", sans-serif;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.letter-page .back-button:hover {
+  transform: translateY(-2px);
+  background: #fff;
+}
+
+/* Envelope screen */
+
+.envelope-section {
+  width: min(100%, 690px);
+  margin: 25px auto 0;
+  text-align: center;
+  animation: letter-fade-up 0.7s ease both;
+}
+
+.letter-top-decoration {
+  margin-bottom: 20px;
+  color: var(--letter-pink);
+  font-size: 1.5rem;
+  letter-spacing: 12px;
+}
+
+.letter-page .eyebrow {
+  margin: 0 0 14px;
+  color: var(--letter-pink);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  line-height: 1.8;
+}
+
+.letter-heading {
+  margin: 0;
+  color: var(--letter-deep);
+  font: 700 clamp(2.8rem, 7vw, 4.6rem)/1.06 "Playfair Display", serif;
+}
+
+.letter-heading span {
+  display: block;
+  margin-top: 12px;
+  color: var(--letter-pink);
+  font-size: clamp(1.2rem, 3vw, 1.65rem);
+  letter-spacing: 0.01em;
+}
+
+.letter-intro {
+  margin: 22px auto 30px;
+  color: #906578;
+  font-size: 1rem;
+  line-height: 1.9;
+}
+
+/* Envelope */
+
+.envelope {
+  position: relative;
+  display: block;
+  width: min(100%, 310px);
+  height: 205px;
+  margin: 30px auto 24px;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  perspective: 900px;
+  filter: drop-shadow(0 18px 20px rgba(139, 51, 91, 0.15));
+  transition: transform 0.25s ease;
+}
+
+.envelope:hover {
+  transform: translateY(-5px) rotate(-1deg);
+}
+
+.envelope:focus-visible {
+  outline: 3px solid #c43f75;
+  outline-offset: 8px;
+}
+
+.envelope:disabled {
+  cursor: wait;
+}
+
+.envelope-back {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  background: #f2a8c4;
+}
+
+.envelope-paper {
+  position: absolute;
+  z-index: 1;
+  top: 10px;
+  left: 9%;
+  display: flex;
+  width: 82%;
+  height: 82%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid #efd4dc;
+  background: #fffaf5;
+  color: var(--letter-deep);
+  transition: transform 0.8s ease;
+}
+
+.envelope-paper span {
+  color: var(--letter-pink);
+  font-size: 2.4rem;
+}
+
+.envelope-paper small {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+}
+
+.envelope-flap {
+  position: absolute;
+  z-index: 4;
+  inset: 0 0 auto;
+  height: 65%;
+  background: #e88caf;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transition: transform 0.65s ease;
+}
+
+.envelope-body {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  background: #f8c0d4;
+  clip-path: polygon(0 0, 50% 55%, 100% 0, 100% 100%, 0 100%);
+}
+
+.envelope-heart {
+  position: absolute;
+  top: 53%;
+  left: 50%;
+  color: #b72e65;
+  font-size: 2rem;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 2px 3px rgba(126, 30, 71, 0.15));
+}
+
+.envelope-label {
+  position: absolute;
+  z-index: 5;
+  right: 0;
+  bottom: 15px;
+  left: 0;
+  color: #7b2c4e;
+  font-size: 0.83rem;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+.envelope-opening {
+  animation: envelope-open 0.9s ease forwards;
+}
+
+.envelope-opening .envelope-flap {
+  transform: rotateX(180deg);
+}
+
+.envelope-opening .envelope-paper {
+  transform: translateY(-65px);
+}
+
+.open-hint {
+  margin-top: 25px;
+  color: #976b7e;
+  font-size: 0.88rem;
+  animation: hint-pulse 2s ease-in-out infinite;
+}
+
+.letter-bottom-decoration {
+  margin-top: 45px;
+  color: #ae7690;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
+
+/* Opened letter */
+
+.letter-content-section {
+  width: min(100%, 790px);
+  margin: 0 auto;
+  animation: letter-fade-up 0.65s ease both;
+}
+
+.letter-card {
+  position: relative;
+  width: 100%;
+  padding: clamp(26px, 6vw, 62px);
+  overflow: hidden;
+  border: 1px solid #f0d7df;
+  border-radius: 5px;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 250, 245, 0.97)),
+    #fffaf5;
+  box-shadow:
+    0 25px 70px rgba(134, 57, 91, 0.12),
+    0 3px 10px rgba(134, 57, 91, 0.04);
+}
+
+.letter-card-border {
+  position: absolute;
+  inset: 12px;
+  border: 1px solid rgba(201, 118, 151, 0.24);
+  pointer-events: none;
+}
+
+.letter-card-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 38px;
+  color: var(--letter-pink);
+}
+
+.letter-card-header p {
+  margin: 0;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-align: center;
+}
+
+.letter-card-title-wrap {
+  position: relative;
+  text-align: center;
+}
+
+.letter-card-label {
+  margin: 0 0 17px;
+  color: #a56881;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+}
+
+.letter-card-title {
+  margin: 0;
+  color: var(--letter-deep);
+  font: 700 clamp(2.5rem, 7vw, 4.2rem)/1.12 "Playfair Display", serif;
+}
+
+.letter-card-title span {
+  display: block;
+  margin-top: 8px;
+  color: var(--letter-pink);
+}
+
+.letter-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 25px auto;
+  color: var(--letter-pink);
+}
+
+.letter-divider::before,
+.letter-divider::after {
+  width: 65px;
+  height: 1px;
+  background: #e9b9cb;
+  content: "";
+}
+
+.letter-divider span {
+  font-size: 1.3rem;
+}
+
+.letter-greeting {
+  margin: 0 0 35px;
+  color: #9b4e70;
+  font: italic 600 1.2rem "Playfair Display", serif;
+}
+
+.letter-card-text {
+  position: relative;
+  color: #684858;
+  font-size: 0.98rem;
+  line-height: 2;
+  overflow-wrap: anywhere;
+}
+
+.letter-card-text > p {
+  margin: 0 0 25px;
+}
+
+.letter-card-text strong {
+  color: var(--letter-pink);
+  font-weight: 700;
+}
+
+/* Memory highlight */
+
+.letter-highlight {
+  position: relative;
+  margin: 34px 0;
+  padding: 25px clamp(16px, 4vw, 35px);
+  border: 1px solid #f0cad9;
+  border-radius: 4px;
+  background: linear-gradient(135deg, #fff0f5, #fff8f6);
+  text-align: center;
+}
+
+.letter-highlight p {
+  margin: 12px 0;
+  color: #873956;
+  font: 500 1.03rem/1.9 "Playfair Display", serif;
+}
+
+.highlight-heart {
+  color: #c43f75;
+  font-size: 1.25rem;
+}
+
+.memory-note {
+  margin: 35px 0;
+  padding: 25px;
+  border-left: 3px solid #d67b9f;
+  background: #fff1f5;
+}
+
+.memory-note-icon {
+  font-size: 1.5rem;
+}
+
+.memory-note h2 {
+  margin: 10px 0;
+  color: #85314f;
+  font: 600 1.35rem "Playfair Display", serif;
+}
+
+.memory-note p {
+  margin: 0;
+  line-height: 1.9;
+}
+
+.letter-card-text .letter-final-line {
+  margin-top: 30px;
+  color: #9c315e;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Birthday wish */
+
+.letter-wish {
+  position: relative;
+  margin-top: 40px;
+  padding: 32px 22px;
+  border-top: 1px solid #edc9d7;
+  border-bottom: 1px solid #edc9d7;
+  background: rgba(255, 240, 246, 0.62);
+  text-align: center;
+}
+
+.wish-decoration {
+  color: var(--letter-pink);
+  font-size: 1.4rem;
+}
+
+.wish-small {
+  margin: 14px 0;
+  color: #a26c82;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.letter-wish h2 {
+  margin: 10px 0;
+  color: var(--letter-deep);
+  font: 700 clamp(1.7rem, 5vw, 2.6rem) "Playfair Display", serif;
+}
+
+.letter-wish p:not(.wish-small) {
+  color: #84536a;
+  line-height: 1.9;
+}
+
+.letter-wish .wish-main {
+  color: #ae2f65;
+  font-weight: 700;
+}
+
+.letter-card-footer {
+  margin-top: 35px;
+  text-align: right;
+}
+
+.letter-card-footer p {
+  margin: 0;
+  color: #906075;
+  font: italic 1rem "Playfair Display", serif;
+}
+
+.letter-card-footer h2 {
+  margin: 8px 0;
+  color: var(--letter-deep);
+  font: 700 1.8rem "Playfair Display", serif;
+}
+
+.letter-card-footer span {
+  color: #a77b8e;
+  font-size: 0.75rem;
+}
+
+.letter-card-end {
+  margin-top: 35px;
+  color: var(--letter-pink);
+  text-align: center;
+  letter-spacing: 8px;
+}
+
+/* Bottom buttons */
+
+.letter-bottom-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 13px;
+  margin-top: 28px;
+}
+
+.close-letter-button {
+  min-height: 48px;
+  padding: 12px 24px;
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  background: linear-gradient(135deg, #d75d91, #ad386b);
+  box-shadow: 0 8px 20px rgba(173, 56, 107, 0.2);
+  font: 600 0.9rem "DM Sans", sans-serif;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.close-letter-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(173, 56, 107, 0.27);
+}
+
+.letter-mobile-back {
+  display: none !important;
+}
+
+.letter-page button:focus-visible {
+  outline: 3px solid #9c315e;
+  outline-offset: 4px;
+}
+
+/* Animations */
+
+@keyframes letter-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes envelope-open {
+  0% {
+    transform: scale(1);
+  }
+
+  45% {
+    transform: scale(1.04);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.92) translateY(-10px);
+  }
+}
+
+@keyframes hint-pulse {
+  0%, 100% {
+    opacity: 0.7;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* Responsive layout */
+
+@media (max-width: 600px) {
+  .letter-page {
+    padding: 75px 15px 35px;
+  }
+
+  .letter-back-button {
+    top: 15px;
+    left: 15px;
+  }
+
+  .envelope-section {
+    margin-top: 25px;
+  }
+
+  .letter-intro {
+    font-size: 0.92rem;
+  }
+
+  .envelope {
+    width: min(100%, 285px);
+    height: 190px;
+  }
+
+  .letter-card {
+    padding: 32px 25px;
+  }
+
+  .letter-card-border {
+    inset: 8px;
+  }
+
+  .letter-card-header {
+    gap: 8px;
+    margin-bottom: 30px;
+  }
+
+  .letter-card-header p {
+    font-size: 0.55rem;
+  }
+
+  .letter-card-text {
+    font-size: 0.93rem;
+    line-height: 1.9;
+  }
+
+  .letter-highlight {
+    padding: 20px 15px;
+  }
+
+  .memory-note {
+    padding: 19px;
+  }
+
+  .letter-wish {
+    padding: 27px 12px;
+  }
+
+  .letter-bottom-actions {
+    flex-direction: column;
+  }
+
+  .close-letter-button,
+  .letter-mobile-back {
+    width: 100%;
+  }
+
+  .letter-page .letter-mobile-back {
+    display: inline-flex !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .letter-page *,
+  .letter-page *::before,
+  .letter-page *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* LOVE seal on the envelope */
+.envelope-love-seal {
+  position: absolute;
+  z-index: 6;
+  top: 45%;
+  left: 50%;
+  display: flex;
+  width: 66px;
+  height: 66px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 2px solid #fff0f5;
+  border-radius: 50%;
+  color: #fff8fb;
+  background: radial-gradient(circle at 30% 25%, #f08bb4, #a91f55 80%);
+  box-shadow:
+    0 4px 12px rgba(137, 27, 70, 0.3),
+    inset 0 0 0 3px rgba(255, 255, 255, 0.22);
+  transform: translate(-50%, -50%);
+  transition: opacity 0.35s ease, transform 0.5s ease;
+  pointer-events: none;
+}
+
+.envelope-love-seal span {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.envelope-love-seal small {
+  margin-top: 3px;
+  font-size: 0.48rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.envelope-opening .envelope-love-seal {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1.5) rotate(18deg);
+}
+/* ===== LUXURY LOVE LETTER COVER ===== */
+
+.envelope-section {
+  position: relative;
+  width: min(100%, 700px);
+  margin: 20px auto 0;
+  padding: 35px 20px 45px;
+  text-align: center;
+}
+
+.letter-top-decoration {
+  color: #b77b46;
+  font-size: 1.5rem;
+  letter-spacing: 12px;
+  margin-bottom: 25px;
+}
+
+.letter-heading {
+  color: #6f2344;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(3rem, 8vw, 5rem);
+  font-weight: 700;
+  line-height: 1.08;
+  text-shadow: 0 3px 20px rgba(175, 71, 112, 0.1);
+}
+
+.letter-heading span {
+  display: block;
+  margin-top: 15px;
+  color: #bb4776;
+  font-family: "Playfair Display", serif;
+  font-size: clamp(1.25rem, 4vw, 1.8rem);
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* Intro text */
+
+.letter-intro {
+  margin: 24px auto 35px;
+  color: #86566a;
+  font-size: 0.98rem;
+  line-height: 1.9;
+}
+
+/* Envelope base */
+
+.envelope {
+  position: relative;
+  isolation: isolate;
+  display: block;
+  width: min(100%, 340px);
+  height: 230px;
+  margin: 45px auto 28px;
+  padding: 0;
+  overflow: visible;
+  border: 1px solid rgba(183, 123, 70, 0.45);
+  border-radius: 5px;
+  background: #f5b9cf;
+  box-shadow:
+    0 25px 50px rgba(117, 39, 73, 0.18),
+    0 8px 18px rgba(117, 39, 73, 0.09);
+  cursor: pointer;
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.envelope::before {
+  position: absolute;
+  z-index: 0;
+  inset: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  content: "";
+  pointer-events: none;
+}
+
+.envelope:hover {
+  transform: translateY(-6px) rotate(-1deg);
+  box-shadow:
+    0 32px 60px rgba(117, 39, 73, 0.23),
+    0 10px 22px rgba(117, 39, 73, 0.1);
+}
+
+/* Soft satin-like envelope back */
+
+.envelope-back {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  border-radius: 5px;
+  background:
+    linear-gradient(135deg, #ffe0eb, #ef9fbe 48%, #f7c5d8);
+}
+
+/* Letter peeking out */
+
+.envelope-paper {
+  position: absolute;
+  z-index: 1;
+  top: 10px;
+  left: 8%;
+  display: flex;
+  width: 84%;
+  height: 85%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid #dfc39a;
+  background:
+    linear-gradient(rgba(255, 253, 246, 0.97), rgba(255, 246, 237, 0.98));
+  box-shadow: 0 2px 8px rgba(104, 49, 67, 0.08);
+  color: #813453;
+  transition: transform 0.75s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.envelope-paper::before {
+  position: absolute;
+  inset: 7px;
+  border: 1px solid rgba(183, 123, 70, 0.28);
+  content: "";
+}
+
+.envelope-paper span {
+  color: #b83e6f;
+  font-family: "Playfair Display", serif;
+  font-size: 2.7rem;
+}
+
+.envelope-paper small {
+  color: #a47b58;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+}
+
+/* Envelope flap */
+
+.envelope-flap {
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 66%;
+  background: linear-gradient(150deg, #fbd1df, #e98caf);
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transition:
+    transform 0.65s ease,
+    filter 0.65s ease;
+  backface-visibility: visible;
+}
+
+/* Front folds */
+
+.envelope-body {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  background: linear-gradient(140deg, #f8c4d7, #ed9cba);
+  clip-path: polygon(0 0, 50% 57%, 100% 0, 100% 100%, 0 100%);
+}
+
+.envelope-body::before,
+.envelope-body::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+}
+
+.envelope-body::before {
+  background: linear-gradient(45deg, #f9d3e0, transparent 65%);
+  clip-path: polygon(0 0, 50% 57%, 0 100%);
+}
+
+.envelope-body::after {
+  background: linear-gradient(-45deg, #e991b2, transparent 65%);
+  clip-path: polygon(100% 0, 50% 57%, 100% 100%);
+}
+
+/* Wax love seal */
+
+.envelope-love-seal {
+  position: absolute;
+  z-index: 6;
+  top: 48%;
+  left: 50%;
+  display: flex;
+  width: 76px;
+  height: 76px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 2px solid #f9d9a5;
+  border-radius: 50%;
+  outline: 1px solid rgba(183, 123, 70, 0.8);
+  outline-offset: -7px;
+  color: #fff5f4;
+  background:
+    radial-gradient(circle at 30% 25%, #e86e9e, #b52961 72%, #8f1949);
+  box-shadow:
+    0 6px 15px rgba(103, 24, 58, 0.25),
+    inset 0 2px 5px rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition:
+    opacity 0.3s ease,
+    transform 0.5s ease;
+  pointer-events: none;
+}
+
+.envelope-love-seal span {
+  font-size: 1.45rem;
+  line-height: 1;
+}
+
+.envelope-love-seal small {
+  margin-top: 4px;
+  font-size: 0.46rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+/* Front label */
+
+.envelope-label {
+  position: absolute;
+  z-index: 7;
+  right: 0;
+  bottom: 12px;
+  left: 0;
+  color: #7b284b;
+  font-family: "Playfair Display", serif;
+  font-size: 0.9rem;
+  font-style: italic;
+  font-weight: 700;
+  pointer-events: none;
+}
+
+/* Opening animation */
+
+.envelope-opening {
+  animation: luxury-envelope-open 0.9s ease forwards;
+}
+
+.envelope-opening .envelope-flap {
+  transform: rotateX(180deg);
+}
+
+.envelope-opening .envelope-paper {
+  transform: translateY(-95px);
+}
+
+.envelope-opening .envelope-love-seal {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1.4) rotate(18deg);
+}
+
+@keyframes luxury-envelope-open {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  40% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(0.94) translateY(-12px);
+    opacity: 0;
+  }
+}
+
+/* Cover footer */
+
+.open-hint {
+  margin-top: 28px;
+  color: #945a73;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+}
+
+.letter-bottom-decoration {
+  margin-top: 42px;
+  color: #a77860;
+  font-family: "Playfair Display", serif;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .envelope-section {
+    padding: 25px 8px 35px;
+  }
+
+  .envelope {
+    width: min(100%, 310px);
+    height: 210px;
+    margin-top: 38px;
+  }
+
+  .envelope-love-seal {
+    width: 68px;
+    height: 68px;
+  }
+
+  .letter-heading {
+    font-size: clamp(2.8rem, 12vw, 4rem);
+  }
+
+  .letter-heading span {
+    font-size: 1.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .envelope,
+  .envelope *,
+  .envelope::before {
+    transition-duration: 0.01ms !important;
+  }
+
+  .envelope-opening {
+    animation-duration: 0.01ms !important;
+  }
+}

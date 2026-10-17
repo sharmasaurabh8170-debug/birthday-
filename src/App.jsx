@@ -64,12 +64,12 @@ return ( <main className="welcome-screen"> <div className="background-glow glow-
     <div className="welcome-card">
       <div className="welcome-sparkle">✨ 💗 ✨</div>
 
-      <p className="eyebrow">A little surprise for you</p>
+      <p className="eyebrow">A little surprise for you  💗</p>
 
       <h1 className="welcome-title">
-        YAYYY!
+        YAYYY ! 💕
         <br />
-        <span>You unlocked the magic!</span>
+        <span>You unlocked the gift !🧸</span>
       </h1>
 
       <p className="welcome-text">
@@ -79,7 +79,7 @@ return ( <main className="welcome-screen"> <div className="background-glow glow-
       <div className="welcome-decoration">🎂 🎁 🧸</div>
 
       <button className="begin-button" onClick={enterWebsite}>
-        Open Your Surprise <span>♡</span>
+        Open My Surprise  💗<span>♡</span>
       </button>
     </div>
 
@@ -196,12 +196,12 @@ return ( <main className="birthday-page"> <div className="background-glow glow-o
             </h2>
 
             <p className="diary-cover-footer">
-              Only for the birthday girl
+              Only for the birthday girl  💗
             </p>
           </div>
 
           <p className="eyebrow diary-eyebrow">
-            Your little surprise awaits
+            Your little surprise awaits 💗
           </p>
 
           <h2 className="birthday-title diary-heading">
@@ -219,7 +219,7 @@ return ( <main className="birthday-page"> <div className="background-glow glow-o
             className="birthday-form"
           >
             <label htmlFor="birthday-date">
-              Your secret birthday
+              Your secret birth-date 🎂
             </label>
 
             <input
@@ -242,7 +242,7 @@ return ( <main className="birthday-page"> <div className="background-glow glow-o
 
             <button type="submit" className="unlock-button">
               <span aria-hidden="true">🔐</span>
-              Unlock My Diary
+              Unlock My gift 💕🎀
               <span aria-hidden="true">♡</span>
             </button>
           </form>
@@ -254,7 +254,7 @@ return ( <main className="birthday-page"> <div className="background-glow glow-o
           </div>
 
           <p className="secret">
-            Psst... a little birthday magic is waiting inside ✨
+            fast... a little birthday magic is waiting inside ✨
           </p>
         </section>
       </div>
@@ -281,9 +281,9 @@ return (
         <div className="home-sparkles">✧ ˚ · ♡ · ˚ ✧</div>
 
         <h1 className="birthday-title">
-          Happy Birthday,
+          Happpyyy Birthday ,
           <br />
-          <span>Beautiful Soul!</span>
+          <span>Wifeeyyy  💗!</span>
         </h1>
 
         <p className="her-name">
@@ -291,9 +291,9 @@ return (
         </p>
 
         <p className="home-description">
-          Every little corner holds a surprise.
+          Every little corner holds a surprise.✨
           <br />
-          Pick one and let the magic begin. 🦋
+          Pick one and let the gifts begin.💗🦋
         </p>
 
         <div className="experience-grid">
@@ -302,8 +302,8 @@ return (
             onClick={() => setPage("memories")}
           >
             <span className="card-icon">📸</span>
-            <h2>Our Memories</h2>
-            <p>Little moments, endless smiles.</p>
+            <h2>My Beautiful Babbyy 💗💕🎀</h2>
+            <p>I Loveeee Uhhhh Wifeyyy 💗🎀...</p>
             <span className="card-arrow">↗</span>
           </button>
 
@@ -312,8 +312,8 @@ return (
             onClick={() => setPage("letter")}
           >
             <span className="card-icon">💌</span>
-            <h2>A Little Letter</h2>
-            <p>Some words from the heart.</p>
+            <h2>MY Wishes and Love for you 💌🎀💗</h2>
+            <p>Kuch Bate jo m Bol nhi pata🎀,kunki aapko dekhkr sb bhul jata hu💗.</p>
             <span className="card-arrow">↗</span>
           </button>
 
@@ -322,14 +322,14 @@ return (
             onClick={() => setPage("cake")}
           >
             <span className="card-icon">🎂</span>
-            <h2>Birthday Cake</h2>
-            <p>Make a wish and celebrate!</p>
+            <h2>Your Cake is Waiting ✨🎂💗</h2>
+            <p>Make a Wish and Lets Celebrate!✨💗</p>
             <span className="card-arrow">↗</span>
           </button>
         </div>
 
         <footer className="home-footer">
-          Crafted with ♡ and a little birthday magic
+          Crafted with 💗 and a little birthday magic ✨
         </footer>
       </div>
     </main>

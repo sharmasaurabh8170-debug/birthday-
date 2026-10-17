@@ -15,7 +15,7 @@ import {
 const memoryFolders = [
   {
     id: "first",
-    title: "Little Baby",
+    title: "My Baby 💕",
     description: "When my babyy is actually a babyy 😁😅.",
     photos: [
       "cover.jpg",
@@ -35,7 +35,7 @@ const memoryFolders = [
   },
   {
     id: "Second",
-    title: "Wife material 💕",
+    title: "My Wifeyy🤗💕",
     description: "🤞💕",
     photos: [
       "cover.jpg",
@@ -53,7 +53,7 @@ const memoryFolders = [
       "photo13.jpg",
       "photo14.jpg",
       "photo15.jpg",
-      "phot016.jpg",
+      "photo16.jpg",
       "photo17.jpg",
       "photo18.jpg",
       "photo19.jpg",
@@ -68,7 +68,7 @@ const memoryFolders = [
   },
   {
     id: "Fourth",
-    title: "When We're Together 🤞💕",
+    title: "Hum Dono 👻💕",
     description: "Our silly little moments 🤗👻",
     photos: [
       "cover.jpg",
@@ -421,18 +421,18 @@ export default function Memories({ onBack }) {
     className="scrapbook-open-button"
     onClick={() => setCoverOpen(true)}
   >
-    Open our scrapbook <span>♡</span>
+   <span> Open our scrapbook 💕👻</span> 
   </button>
 </section>
 
       ) : (
         <section className="scrapbook-inside">
           <header className="scrapbook-heading">
-            <p className="eyebrow">OUR LITTLE WORLD ♡</p>
+            <p className="eyebrow">OUR LITTLE WORLD 💕♡</p>
             <h1>
-              Pages of <span>Us</span>
+              Pages of <span>Us 🎀</span>
             </h1>
-            <p>Every photo is a little piece of our story.</p>
+            <p>Every photo is a little piece of our story.👻💕</p>
           </header>
 
           <div
@@ -446,7 +446,7 @@ export default function Memories({ onBack }) {
             {/* LEFT PAGE */}
             <div className="scrapbook-paper scrapbook-left-page">
               <div className="scrapbook-paper-header">
-                <span>OUR LITTLE MEMORIES</span>
+                <span>OUR LITTLE MEMORIES 💕</span>
                 <span>♡</span>
               </div>
 
@@ -457,7 +457,7 @@ export default function Memories({ onBack }) {
               </div>
 
               <div className="scrapbook-paper-footer">
-                <span>made with love ♡</span>
+                <span>made with love ✿💕</span>
                 <span>{pageIndex + 1} / {totalPages}</span>
               </div>
             </div>
@@ -465,7 +465,7 @@ export default function Memories({ onBack }) {
             {/* RIGHT PAGE */}
             <div className="scrapbook-paper scrapbook-right-page">
               <div className="scrapbook-paper-header">
-                <span>OUR STORY CONTINUES</span>
+                <span>OUR STORY CONTINUES ✿💕</span>
                 <span>✿</span>
               </div>
 
@@ -476,7 +476,7 @@ export default function Memories({ onBack }) {
               </div>
 
               <div className="scrapbook-paper-footer">
-                <span>stuck here forever ♡</span>
+                <span>stuck here forever ✿♡💕</span>
                 <span>{pageIndex + 1} / {totalPages}</span>
               </div>
             </div>
@@ -490,11 +490,11 @@ export default function Memories({ onBack }) {
               >
                 <div className="scrapbook-leaf-front">
                   <span>♡</span>
-                  <small>little moments</small>
+                  <small>little moments 💕</small>
                 </div>
                 <div className="scrapbook-leaf-back">
                   <span>୨୧</span>
-                  <small>our story</small>
+                  <small>our story 💕</small>
                 </div>
               </div>
             )}
@@ -511,7 +511,7 @@ export default function Memories({ onBack }) {
               aria-label="Previous scrapbook page"
             >
               <ChevronLeft size={20} />
-              Previous
+              Previous 💕
             </button>
 
             <div
@@ -537,13 +537,13 @@ export default function Memories({ onBack }) {
               disabled={pageIndex === totalPages - 1 || isTurning}
               aria-label="Next scrapbook page"
             >
-              Next
+              Next 💕
               <ChevronRight size={20} />
             </button>
           </nav>
 
           <p className="scrapbook-page-note">
-            Turn the page, find another little memory ✨
+            Turn the page, find another little memory ✨💕
           </p>
         </section>
       )}

@@ -159,9 +159,12 @@ export default function Cake({ onBack }) {
               ))}
             </div>
 
-            <div className="cake-top">
-              <span>♥ ♥</span>
-            </div>
+             <div className="cake-top">
+               <span className="cake-hearts">♥ ♥</span>
+                 <span className="cake-strawberry strawberry-one">🍓</span>
+                   <span className="cake-strawberry strawberry-two">🍓</span>
+                      </div>
+
 
             <div className="cake-middle" />
             <div className="cake-bottom" />
